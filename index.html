@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>喵島職場人生</title>
+<style>
+:root{
+  --blue:#00558C;--sky:#7CA2C9;--grey:#B2B2B2;--ink:#333333;--ink2:#808080;
+  --paper:#F4F8FB;--card:#FFFFFF;--sea:#D3E3F0;--sea2:#BFD5E8;--line:#DCE5EE;
+  --top:#F2F6FA;--left:#CADAE8;--right:#A8C1D8;--sand:#E6DFCB;--sandD:#CFC5AA;--grass:#DDEBCF;
+  --med:#E5352C;--cyan:#0089CE;--green:#7DB956;--orange:#F19156;--pink:#E74587;
+  --onblue:#FFFFFF;--cloud:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#E3ECF4;--ink2:#93A7BA;--paper:#0A1925;--card:#112536;--sea:#0E2A40;--sea2:#0B2235;--line:#22405A;
+    --top:#294560;--left:#1A3248;--right:#13283B;--sand:#3B3A30;--sandD:#2C2B23;--grass:#2B3F2A;--grey:#5F7385;--cloud:#2B4862;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E3ECF4;--ink2:#93A7BA;--paper:#0A1925;--card:#112536;--sea:#0E2A40;--sea2:#0B2235;--line:#22405A;
+  --top:#294560;--left:#1A3248;--right:#13283B;--sand:#3B3A30;--sandD:#2C2B23;--grass:#2B3F2A;--grey:#5F7385;--cloud:#2B4862;
+  color-scheme:dark;
+}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);
+  font-family:Calibri,"Microsoft JhengHei","微軟正黑體","PingFang TC","Noto Sans TC","Heiti TC",sans-serif;
+  font-size:15px;line-height:1.55;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.screen{display:none;max-width:1120px;margin:0 auto;padding:16px}
+.screen.on{display:block}
+.btn{border:0;border-radius:10px;padding:11px 18px;background:var(--blue);color:var(--onblue);font-weight:700}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.ghost{color:var(--sky);box-shadow:inset 0 0 0 2px var(--sky)}}
+.muted{color:var(--ink2)}
+
+/* ---------- title ---------- */
+#title{text-align:center;padding-top:28px}
+.wordmark{font-size:clamp(40px,11vw,76px);line-height:1;font-weight:800;letter-spacing:.04em;color:var(--blue);margin:8px 0 6px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .wordmark{color:var(--sky)}}
+.wordmark span{display:inline-block}
+.tagline{font-size:17px;margin:0 0 18px}
+#titleIsland{width:min(560px,100%);display:block;margin:0 auto}
+.form{max-width:380px;margin:12px auto 0;text-align:left;display:grid;gap:12px}
+.form label{font-size:13px;color:var(--ink2);display:block;margin-bottom:4px}
+.form input{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.seedrow{display:flex;gap:8px}
+.seedrow input{text-transform:uppercase;letter-spacing:.12em}
+.credit{font-size:12px;color:var(--ink2);margin-top:26px}
+.credit a{color:inherit}
+
+/* ---------- resume ---------- */
+#resume .sheet{max-width:640px;margin:0 auto;background:var(--card);border-radius:16px;padding:22px;border-top:6px solid var(--blue)}
+.sheet h2{margin:0 0 2px;font-size:24px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:16px 0}
+.facts dt{color:var(--ink2)}
+.facts dd{margin:0}
+.potential{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 16px;margin:8px 0 18px}
+.asps{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+.asp{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:10px 12px}
+.asp b{display:block}
+.asp small{color:var(--ink2)}
+.asp:hover{border-color:var(--blue)}
+
+/* ---------- game ---------- */
+.hud{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:end;margin-bottom:10px}
+.who{font-size:20px;font-weight:800;line-height:1.2}
+.who small{font-weight:400;color:var(--ink2);font-size:14px;margin-left:6px}
+.clock{text-align:right;font-variant-numeric:tabular-nums}
+.clock b{font-size:28px;color:var(--blue);line-height:1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .clock b{color:var(--sky)}}
+.stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stat{background:var(--card);border-radius:10px;padding:6px 9px;font-size:12px}
+.stat .v{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+.bar{height:5px;border-radius:3px;background:var(--line);margin-top:3px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:3px;transition:width .4s}
+.stage{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:900px){.stage{grid-template-columns:1.35fr 1fr}}
+.islandwrap{position:relative;background:var(--sea);border-radius:16px;overflow:hidden}
+#island{display:block;width:100%;height:auto}
+.zonebadge{position:absolute;left:10px;top:10px;background:var(--card);border-radius:20px;padding:3px 10px;font-size:12px}
+.day{margin:10px 2px 4px}
+.dayhead{display:flex;justify-content:space-between;font-size:12px;color:var(--ink2)}
+.daytrack{position:relative;height:12px;border-radius:6px;margin-top:4px;
+  background:linear-gradient(90deg,#F7E7B4 0%,#CFE2F0 18%,#7CA2C9 55%,#00558C 70%,#0B2A44 100%)}
+.daymark{position:absolute;top:-3px;width:2px;height:18px;background:var(--ink)}
+.daypin{position:absolute;top:-6px;width:24px;height:24px;margin-left:-12px;border-radius:50%;background:var(--card);
+  box-shadow:0 0 0 3px var(--blue);display:grid;place-items:center;font-size:12px}
+.ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--ink2);margin-top:4px;font-variant-numeric:tabular-nums}
+.card{background:var(--card);border-radius:14px;padding:14px 16px;min-height:178px;position:relative;overflow:hidden}
+.card .yearbar{position:absolute;left:0;top:0;height:4px;background:var(--orange)}
+.card h3{margin:2px 0 4px;font-size:19px}
+.card p{margin:0 0 10px}
+.zt{font-size:12px;color:var(--ink2)}
+.opts{display:grid;gap:7px}
+.opt{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:9px 12px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.opt:hover:not(:disabled){border-color:var(--blue)}
+.opt small{white-space:nowrap;color:var(--blue);font-weight:700}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .opt small{color:var(--sky)}}
+.opt:disabled{opacity:.45;cursor:not-allowed}
+.opt.def{border-style:dashed}
+.result{border-left:4px solid var(--blue);padding:6px 10px;background:var(--paper);border-radius:0 8px 8px 0}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.controls .btn{flex:1 1 auto;padding:10px 12px}
+.panel{background:var(--card);border-radius:14px;padding:12px 14px}
+.panel h4{margin:0 0 8px;font-size:15px}
+.skill{display:grid;grid-template-columns:1fr auto;align-items:center;padding:4px 6px;border-radius:8px;font-size:14px}
+.skill.pick{cursor:pointer;background:var(--paper);outline:1px dashed var(--blue);margin-bottom:3px}
+.pips{display:flex;gap:3px}
+.pip{width:12px;height:12px;border-radius:3px;border:1.5px solid var(--sky)}
+.pip.on{background:var(--blue);border-color:var(--blue)}
+.pip.off{border-color:transparent;background:var(--line);opacity:.5}
+.logp{margin-top:12px}
+#log{list-style:none;margin:0;padding:0;max-height:300px;overflow:auto;font-size:13.5px}
+#log li{padding:6px 0;border-bottom:1px solid var(--line)}
+#log li b{color:var(--blue);margin-right:6px;font-variant-numeric:tabular-nums}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #log li b{color:var(--sky)}}
+.live{display:inline-block;font-size:11px;color:var(--med);margin-left:6px}
+.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--med);margin-right:4px;vertical-align:1px}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(0,30,50,.45);display:none;align-items:flex-end;justify-content:center;z-index:20;padding:12px}
+.modal.on{display:flex}
+.sheetm{background:var(--card);border-radius:16px;padding:18px;width:min(520px,100%);max-height:85vh;overflow:auto;margin-bottom:env(safe-area-inset-bottom,0px)}
+@media (min-width:700px){.modal{align-items:center}}
+.sheetm h3{margin:0 0 8px}
+.acts{display:grid;gap:7px}
+.dice{display:flex;gap:10px;margin:8px 0 12px}
+.die{width:54px;height:54px;border-radius:12px;border:2px solid var(--line);background:var(--paper);font-size:26px;font-weight:800}
+.die.sel{border-color:var(--blue);box-shadow:0 0 0 3px var(--sky)}
+.die.used{opacity:.25}
+
+/* end */
+#end .sheet{max-width:760px;margin:0 auto;background:var(--card);border-radius:16px;padding:22px}
+.grade{font-size:84px;font-weight:800;line-height:1;color:var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .grade{color:var(--sky)}}
+.endtop{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:14px 0}
+.kv div{background:var(--paper);border-radius:10px;padding:8px 10px;font-size:13px}
+.kv b{display:block;font-size:17px}
+#chart{width:100%;height:auto;display:block;background:var(--paper);border-radius:12px}
+.legend{font-size:12px;color:var(--ink2);margin:4px 0 12px}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin:0 4px 0 10px}
+.badges{display:flex;flex-wrap:wrap;gap:6px}
+.badge{background:var(--paper);border-radius:20px;padding:4px 10px;font-size:13px}
+.badge.lock{opacity:.35}
+.timeline{list-style:none;padding:0;margin:0;font-size:14px}
+.timeline li{padding:4px 0 4px 14px;border-left:3px solid var(--sky);margin-left:4px}
+
+/* island */
+.ztop{fill:var(--top);transition:fill .3s}
+.ztop.hot{fill:var(--blue)}
+.zname{font-size:9px;fill:var(--ink2)}
+.zname.hot{fill:var(--onblue);font-weight:700}
+.cat{transition:transform 1.3s cubic-bezier(.4,.1,.3,1)}
+.hero-tag{font-size:8px;font-weight:700;fill:var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero-tag{fill:var(--sky)}}
+.wave{animation:drift 6s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translateX(14px)}}
+.pulse{animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.55}}
+.bob{animation:bob 1.8s ease-in-out infinite}
+.cat.walk .bob{animation:hop .3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-.7px)}}
+@keyframes hop{50%{transform:translateY(-2.4px)}}
+.tail{transform-box:fill-box;transform-origin:100% 100%;animation:wag 1.6s ease-in-out infinite}
+@keyframes wag{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(16deg)}}
+.leg-a,.leg-b{transform-box:fill-box;transform-origin:50% 0}
+.cat.walk .leg-a{animation:step .3s ease-in-out infinite alternate}
+.cat.walk .leg-b{animation:step .3s ease-in-out infinite alternate-reverse}
+@keyframes step{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+.eye{transform-box:fill-box;transform-origin:center;animation:blink 4.6s infinite}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.cloud{animation:cloud 50s linear infinite}
+@keyframes cloud{from{transform:translateX(-60px)}to{transform:translateX(470px)}}
+.boat{animation:boat 80s linear infinite}
+@keyframes boat{from{transform:translateX(-30px)}to{transform:translateX(430px)}}
+.zone.pop{animation:pop .65s ease-out}
+@keyframes pop{30%{transform:translateY(-7px)}60%{transform:translateY(1px)}}
+.floaty{font-size:11px;font-weight:800;paint-order:stroke;stroke:var(--card);stroke-width:3px;animation:rise 1.8s ease-out forwards}
+@keyframes rise{from{transform:translateY(0);opacity:0}15%{opacity:1}to{transform:translateY(-24px);opacity:0}}
+.confetti{transform-box:fill-box;transform-origin:center;animation:conf 1.4s ease-out forwards}
+@keyframes conf{0%{transform:translate(0,0) rotate(0)}30%{transform:translate(calc(var(--dx)*.5),-18px) rotate(200deg)}100%{transform:translate(var(--dx),var(--dy)) rotate(560deg);opacity:0}}
+.attrs{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px}
+.attrs span{background:var(--card);border-radius:20px;padding:2px 10px;font-variant-numeric:tabular-nums}
+.arow{display:grid;grid-template-columns:5.2em 1fr 4.6em;align-items:center;gap:8px;font-size:13.5px;padding:3px 0}
+.atrack{position:relative;height:8px;background:var(--line);border-radius:4px}
+.atrack i{position:absolute;left:0;top:0;bottom:0;background:var(--blue);border-radius:4px;transition:width .5s}
+.atrack b{position:absolute;top:-3px;width:2px;height:14px;background:var(--ink2);margin-left:-1px}
+.aval{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink2);font-size:12.5px}
+.story{font-size:16px;line-height:1.85;margin:10px 0 16px}
+.fate{position:absolute;left:10px;right:10px;bottom:10px;background:var(--card);border-left:5px solid var(--cyan);border-radius:10px;padding:8px 12px;font-size:13.5px;box-shadow:0 4px 14px rgba(0,40,70,.18)}
+.fate[hidden]{display:none}
+.fate b{display:block;color:var(--cyan)}
+.fate small{display:block;color:var(--ink2);margin-top:2px}
+.fate.in{animation:fateIn .4s ease-out}
+@keyframes fateIn{from{transform:translateY(12px);opacity:0}}
+.breeds{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.breed{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:4px 2px 6px;font-size:12.5px;display:flex;flex-direction:column;align-items:center}
+.breed svg{width:100%;height:38px;display:block}
+.breed[aria-checked="true"]{border-color:var(--blue);box-shadow:0 0 0 2px var(--sky);font-weight:700}
+@media (prefers-reduced-motion:reduce){.cat,.bar i{transition:none}.wave,.pulse,.bob,.tail,.eye,.cloud,.boat,.zone.pop,.leg-a,.leg-b,.confetti,.floaty{animation:none}}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.asps,.potential{grid-template-columns:1fr}.endtop{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ============ TITLE ============ -->
+<section id="title" class="screen on">
+  <svg id="titleIsland" viewBox="0 0 400 300" aria-hidden="true"></svg>
+  <h1 class="wordmark"><span>喵島</span><span>職場人生</span></h1>
+  <p class="tagline">22 歲，第一份工作是數據分析師。一局大約 6 分鐘。</p>
+  <div class="form">
+    <div><label for="nm">你的貓叫什麼名字</label><input id="nm" maxlength="8" placeholder="例如：小橘"></div>
+    <div><label for="sd">命運種子碼（同一組種子，會抽到同樣的出身）</label>
+      <div class="seedrow"><input id="sd" maxlength="6"><button class="btn ghost" id="reroll" type="button" aria-label="換一組種子">🎲</button></div></div>
+    <div><label id="breedLbl">選一個貓咪品種</label><div class="breeds" id="breeds" role="radiogroup" aria-labelledby="breedLbl"></div><p class="muted" id="breedDesc" style="margin:6px 0 0;font-size:13px"></p></div>
+    <button class="btn" id="go" type="button">開始投胎</button>
+  </div>
+  <p class="credit">玩法致敬 <a href="https://github.com/kai890707/Life-TW" target="_blank" rel="noopener">鬼島人生模擬器</a>（CC BY-NC 4.0）。公司、人物與情節皆為虛構。</p>
+</section>
+
+<!-- ============ RESUME ============ -->
+<section id="resume" class="screen">
+  <div class="sheet">
+    <p class="muted" style="margin:0">前情提要</p>
+    <h2 id="rName"></h2>
+    <p id="rStory" class="story"></p>
+    <h4 style="margin:0">天賦數值</h4>
+    <p class="muted" style="margin:2px 0 8px;font-size:13px">你的每個決定都會讓數值成長，但越接近天花板（灰線）越難再往上，就像運動神經不好的人再努力也有極限。這些數值也會影響「命運事件」發生的機率和嚴重程度。</p>
+    <div id="rAttr"></div>
+    <dl class="facts" id="rFacts"></dl>
+    <h4 style="margin:0">先天潛力（每項專長能練到的上限）</h4>
+    <div class="potential" id="rPot"></div>
+    <h4 style="margin:0">選一個職涯志向</h4>
+    <p class="muted" style="margin:2px 0 0;font-size:13px">志向達成度會決定最後的評分上限。</p>
+    <div class="asps" id="rAsp"></div>
+  </div>
+</section>
+
+<!-- ============ GAME ============ -->
+<section id="game" class="screen">
+  <header class="hud">
+    <div class="who" id="hWho"></div>
+    <div class="clock"><span class="muted" style="font-size:12px">人生剩餘</span><br><b id="hClock">6:00</b></div>
+    <div class="stats">
+      <div class="stat">💰 總資產<div class="v" id="sMoney"></div><div class="muted" id="sSal" style="font-size:11px"></div></div>
+      <div class="stat">🔋 身心電量 <span class="v" id="sE"></span><div class="bar"><i id="bE" style="background:var(--green)"></i></div></div>
+      <div class="stat">😺 幸福感 <span class="v" id="sH"></span><div class="bar"><i id="bH" style="background:var(--pink)"></i></div></div>
+      <div class="stat">📈 績效 <span class="v" id="sP"></span><div class="bar"><i id="bP" style="background:var(--orange)"></i></div></div>
+    </div>
+    <div class="attrs" id="attrs"></div>
+  </header>
+  <div class="stage">
+    <div>
+      <div class="islandwrap">
+        <svg id="island" viewBox="0 0 400 300" role="img" aria-label="喵喵金控辦公島"></svg>
+        <div class="zonebadge" id="asp"></div>
+        <div class="fate" id="fate" hidden></div>
+      </div>
+      <div class="day">
+        <div class="dayhead"><span>今天下班時間</span><span id="dayTxt">08:00</span></div>
+        <div class="daytrack" id="dayTrack"><div class="daymark" style="left:62.5%" title="18:00 準時下班"></div><div class="daypin" id="dayPin">🐾</div></div>
+        <div class="ticks"><span>08</span><span>12</span><span>16</span><span>20</span><span>24</span></div>
+      </div>
+      <div class="card" id="card"></div>
+      <div class="controls">
+        <button class="btn" id="bAct" type="button">💡 我要…</button>
+        <button class="btn" id="bDice" type="button">🎲 特訓</button>
+        <button class="btn ghost" id="bPause" type="button">⏸ 暫停</button>
+        <button class="btn ghost" id="bNext" type="button">⏭ 下一年</button>
+      </div>
+    </div>
+    <aside>
+      <div class="panel" style="margin-bottom:12px"><h4>天賦數值 <small class="muted" style="font-weight:400">灰線是天花板</small></h4><div id="attrPanel"></div></div>
+      <div class="panel"><h4>專長</h4><div id="skills"></div></div>
+      <div class="panel logp"><h4>職場日誌<span class="live">LIVE</span></h4><ul id="log"></ul></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ END ============ -->
+<section id="end" class="screen">
+  <div class="sheet">
+    <div class="endtop">
+      <div class="grade" id="eGrade">A</div>
+      <div><h2 id="eTitle" style="margin:0"></h2><p id="eSub" class="muted" style="margin:4px 0 0"></p></div>
+    </div>
+    <div class="kv" id="eKv"></div>
+    <svg id="chart" viewBox="0 0 600 200" aria-label="幸福感與總資產曲線"></svg>
+    <div class="legend"><i style="background:var(--pink)"></i>幸福感<i style="background:var(--blue)"></i>總資產</div>
+    <h4 style="margin:4px 0 6px">職涯里程碑</h4>
+    <ul class="timeline" id="eTl"></ul>
+    <h4 style="margin:16px 0 6px">成就圖鑑 <span class="muted" id="eAchN" style="font-weight:400"></span></h4>
+    <div class="badges" id="eAch"></div>
+    <div class="controls" style="margin-top:18px">
+      <button class="btn" id="again" type="button">再投胎一次</button>
+      <button class="btn ghost" id="same" type="button">同一顆種子重玩</button>
+      <button class="btn ghost" id="copy" type="button">複製挑戰連結</button>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="sheetm" id="msheet"></div></div>
+
+<script>
+"use strict";
+/* ================= constants ================= */
+const YEAR_MS = 8200, START_AGE = 22, RETIRE = 65;
+const SK = {sql:["🗃️","SQL 資料"],bi:["📊","BI 視覺化"],ai:["🤖","AI 建模"],fin:["💹","金融業務"],
+  talk:["🗣️","溝通簡報"],pm:["🧭","專案管理"],gov:["🛡️","資料治理"],zen:["🐾","職場玄學"]};
+const SKK = Object.keys(SK);
+const XP_LV = [0,4,10,18,28,40];
+const LADDER = [["數據分析師",62],["資深數據分析師",85],["資料科學家",118],["數據組經理",168],["數據處處長",255],["首席數據長 CDO",430]];
+const ZONES = {
+  boss:{n:"主管室",e:"👔",x:0,y:0,h:22}, meet:{n:"會議室",e:"📋",x:1,y:0,h:18}, server:{n:"機房",e:"🖥️",x:2,y:0,h:26},
+  train:{n:"訓練教室",e:"📚",x:0,y:1,h:16}, desk:{n:"座位區",e:"💻",x:1,y:1,h:12}, pantry:{n:"茶水間",e:"☕",x:2,y:1,h:14},
+  roof:{n:"頂樓天台",e:"🌇",x:0,y:2,h:30}, lobby:{n:"大廳",e:"🚪",x:1,y:2,h:10}, home:{n:"貓窩",e:"🏠",x:2,y:2,h:16}
+};
+const ASP = {
+  rich:["💰","財富自由","退休時總資產越高越好，5000 萬滿分"],
+  cdo:["🏆","CDO 之路","一路爬上首席數據長"],
+  tech:["🧪","技術大神","SQL、BI、AI 三項練到頂"],
+  chill:["🍃","準時下班","平均 18:30 前下班，保持幸福"],
+  found:["🚀","創業當老闆","離開金控，創業並成功"],
+  world:["🌏","外派看世界","外派海外，帶著成就回來"]
+};
+const ACH = {
+  cdo:["🏆","坐上 CDO"], rich:["💎","身家破億"], chill:["🍃","準點下班喵"], burn:["🔥","燃燒殆盡"],
+  fraud:["🕵️","抓到詐騙集團"], innov:["🥇","年度創新大獎"], found:["🚀","創業成功"], world:["🌏","外派歸國"],
+  tech5:["🧪","技術封頂"], wed:["💍","辦公室戀情修成正果"], hop:["🦘","跳槽三次"], audit:["📎","被稽核找上門"],
+  fire:["🏖️","提早退休"], kitten:["🐱","當爸媽了"], sss:["👑","傳奇貓生 SSS"]
+};
+
+/* ================= 天賦數值（有天花板，按比例成長） ================= */
+const ATTR={iq:["🧠","IQ",70,160],eq:["💗","EQ",0,100],l:["🍀","幸運",0,100],body:["💪","體質",0,100]};
+const AKK=Object.keys(ATTR);
+const IQ_SK=["sql","bi","ai","gov","fin"], EQ_SK=["talk","pm","zen"];
+// 成長量 = 努力量 × (天花板 − 目前值) ÷ (天花板 − 最低值)：越接近天花板，越難再長
+function grow(k,amt){
+  if(!amt||!S||!S.acap) return 0;
+  const mn=ATTR[k][2], cap=S.acap[k], cur=S[k];
+  const d = amt>0 ? amt*Math.max(0,cap-cur)/(cap-mn) : amt;
+  S[k]=clamp(cur+d,mn,Math.max(cap,cur));
+  return d;
+}
+
+/* ================= 命運事件（玩家不可控，機率與嚴重度受數值影響） ================= */
+const FATE=[
+ {t:"接到「假檢察官」來電",p:()=>.05*(1.7-S.iq/100)*(1.4-S.l/100),run:()=>{const k=clamp(1.65-S.iq/100,.2,1.2);const loss=Math.round((10+Math.max(0,S.cash)*.08)*k);S.cash-=loss;return [`被騙走 ${fmt(loss)}。`,`IQ ${Math.round(S.iq)}：越聰明越早識破，損失倍率 ×${k.toFixed(2)}`]}},
+ {t:"生病住院",p:()=>.03+Math.max(0,60-S.body)/500+(S.e<30?.08:0)+S.age/1500,run:()=>{const k=clamp(1.5-S.body/100,.4,1.3);const de=Math.round(rnd(10,26)*k),dm=Math.round(rnd(5,40)*k);S.e=clamp(S.e-de,0,100);S.cash-=dm;S.p=clamp(S.p-4,0,100);return [`住院一週，電量 -${de}，醫藥費 ${dm} 萬。`,`體質 ${Math.round(S.body)}：身體越好恢復越快，嚴重度 ×${k.toFixed(2)}`]}},
+ {t:"上班途中小車禍",p:()=>.03*(1.5-S.l/100),run:()=>{const k=clamp(1.5-S.l/100,.4,1.4);const dm=Math.round(rnd(3,25)*k);S.cash-=dm;S.e=clamp(S.e-6,0,100);return [`機車送修加上皮肉傷，花了 ${dm} 萬。`,`幸運 ${Math.round(S.l)}：運氣越好傷得越輕，嚴重度 ×${k.toFixed(2)}`]}},
+ {t:"部門裁員名單出爐",c:()=>S.track==="corp"&&S.age>=27&&S.lvl<5,p:()=>.035+Math.max(0,55-S.p)/500+Math.max(0,60-S.eq)/900,run:()=>{const pp=Math.round(S.p),ee=Math.round(S.eq);if(S.p+S.eq/4>=62){S.h=clamp(S.h-3,0,100);return ["名單上沒有你，但隔壁的座位空了。",`績效 ${pp}、EQ ${ee}：表現與人緣讓你逃過一劫`]}const was=title();S.lvl=Math.max(0,S.lvl-1);S.salary=Math.round(Math.max(LADDER[S.lvl][1],S.salary*.82));S.yrsAtLvl=0;S.cash-=Math.round(S.salary*.25);S.h=clamp(S.h-12,0,100);S.p=50;mile("被裁員，從「"+was+"」重新開始");return [`你被裁員了。待業三個月後，以「${LADDER[S.lvl][0]}」重新出發。`,`績效 ${pp}、EQ ${ee}：數值越低，越容易被列進名單`]}},
+ {t:"貴人出現",p:()=>.03+S.eq/700+S.l/900,run:()=>{S.boost=1;S.b=clamp(S.b+6,0,100);S.n+=5;return ["跨部門的副總很欣賞你，答應在升遷會議上幫你說話。",`EQ ${Math.round(S.eq)}、幸運 ${Math.round(S.l)}：人緣與運氣越好，越容易遇到貴人`]}},
+ {t:"意外之財",p:()=>.02+S.l/600,run:()=>{const g=Math.max(1,Math.round(rnd(5,80)*S.l/55));S.cash+=g;S.h=clamp(S.h+5,0,100);return [`遠房阿姨包了一個大紅包給你，${g} 萬。`,`幸運 ${Math.round(S.l)}：運氣越好，金額越大`]}},
+ {t:"公司加碼分紅",c:()=>S.track==="corp",p:()=>.05+S.p/600,run:()=>{const g=Math.round(S.salary*rnd(.1,.4)*S.p/65);S.cash+=g;return [`今年獲利創新高，你分到 ${g} 萬。`,`績效 ${Math.round(S.p)}：績效越高分越多`]}},
+ {t:"被獵頭直接挖角",c:()=>S.track==="corp"&&S.lvl<5&&S.age>=25,p:()=>.015+Math.max(0,S.iq-100)/1500+S.n/2000,run:()=>{S.lvl++;S.yrsAtLvl=0;S.salary=Math.max(Math.round(S.salary*1.2),LADDER[S.lvl][1]);S.jobHops++;if(S.jobHops>=3)ach("hop");mile("被挖角，升任"+LADDER[S.lvl][0]);celebrate("🚀 被挖角！");return [`對手公司以「${LADDER[S.lvl][0]}」、年薪 ${S.salary} 萬把你挖走。`,`IQ ${Math.round(S.iq)}、人脈 ${Math.round(S.n)}：能力與人脈越強，越常被挖角`]}},
+ {t:"功勞被同事搶走",p:()=>.05*(1.6-S.eq/100),run:()=>{const k=clamp(1.4-S.eq/100,.3,1.4);const d=Math.round(rnd(6,14)*k);S.p=clamp(S.p-d,0,100);S.h=clamp(S.h-4,0,100);return [`你熬夜做的分析，被同事拿去跟老闆報告，績效 -${d}。`,`EQ ${Math.round(S.eq)}：EQ 越高越懂得讓功勞被看見，損失 ×${k.toFixed(2)}`]}},
+ {t:"股市劇烈波動",c:()=>S.stock>50,p:()=>.14,run:()=>{const pu=.4+S.l/250,up=R()<pu;const d=Math.round(S.stock*rnd(.1,.3)*(up?1:-1));S.stock+=d;return [up?`持股大漲，帳面多了 ${fmt(d)}。`:`持股重挫，帳面少了 ${fmt(-d)}。`,`幸運 ${Math.round(S.l)}：上漲機率 ${Math.round(pu*100)}%`]}},
+ {t:"家裡臨時需要用錢",c:()=>S.age>=30,p:()=>.04,run:()=>{const k=clamp(1.3-S.l/120,.5,1.3);const dm=Math.round(rnd(20,100)*k);S.cash-=dm;S.h=clamp(S.h-3,0,100);return [`老家漏水，長輩又要開刀，你拿出 ${dm} 萬。`,`幸運 ${Math.round(S.l)}：運氣越好狀況越輕，金額 ×${k.toFixed(2)}`]}},
+ {t:"你的分析被老闆轉發全公司",p:()=>.02+Math.max(0,S.iq-100)/2000+lv("bi")/100,run:()=>{S.p=clamp(S.p+10,0,100);S.n+=6;S.b=clamp(S.b+5,0,100);return ["總經理在全員信裡點名稱讚你的報告。",`IQ ${Math.round(S.iq)}、BI Lv${lv("bi")}：報告品質越好，越容易被看見`]}}
+];
+function rollFate(){
+  const pool=FATE.filter(f=>!f.c||f.c());
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+  for(const f of pool){ if(R()<clamp(f.p(),0,.6)) return f; }
+  return null;
+}
+function snap(){ return {p:S.p,e:S.e,h:S.h,t:total(),iq:S.iq,eq:S.eq,l:S.l,body:S.body}; }
+function fireFate(){
+  const f=S.fate; S.fate=null; if(!f) return;
+  const before=snap();
+  const [msg,why]=f.run();
+  log("🎲 "+f.t+"："+msg);
+  if(typeof showFate==="function") showFate(f.t,msg,why);
+  reactFx(before);
+  if(!S.ended) renderAll();
+}
+
+/* ================= rng ================= */
+function hashStr(s){let h=1779033703^s.length;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}return h>>>0}
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let R = Math.random;
+const rnd = (a,b)=>a+R()*(b-a);
+const ri = (a,b)=>Math.floor(rnd(a,b+1));
+const pick = arr=>arr[Math.floor(R()*arr.length)];
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+function gauss(){let u=0,v=0;while(!u)u=R();while(!v)v=R();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function newSeed(){const c="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return s}
+
+/* ================= state ================= */
+let S = null;
+const lv = k => {let x=S.xp[k],l=0;for(let i=1;i<=5;i++)if(x>=XP_LV[i])l=i;return Math.min(l,S.cap[k])};
+const total = () => S.cash + S.stock + S.house - S.mortLeft;
+const fmt = v => {const a=Math.abs(v);const s=v<0?"-":"";if(a>=10000)return s+(a/10000).toFixed(2)+" 億";return s+Math.round(a).toLocaleString()+" 萬"};
+const title = () => S.track==="founder" ? "新創創辦喵" : S.track==="startup" ? "創業中的喵" : LADDER[S.lvl][0] + (S.flags.expat && !S.flags.returned ? "（外派）" : "");
+
+function addXp(k,n){
+  const before = lv(k);
+  S.xp[k] = Math.min(XP_LV[S.cap[k]], S.xp[k]+n);
+  if(n>0){ if(IQ_SK.includes(k)) grow("iq",n*1.1); if(EQ_SK.includes(k)) grow("eq",n); if(k==="zen") grow("l",n*.5); }
+  const after = lv(k);
+  if(after>before){ log(`${SK[k][0]} ${SK[k][1]} 升到 Lv${after}`+(after===S.cap[k]?"（已達潛力上限）":"")); if(after>=3 && before<3){S.dice++;} }
+}
+function fx(o){
+  if(!o) return;
+  for(const k in o){
+    const v=o[k];
+    if(k==="m") S.cash+=v;
+    else if(k==="x") for(const s in v) addXp(s,v[s]);
+    else if(k==="ot") S.ot+=v;
+    else if(k==="sal") S.salary=Math.round(S.salary*(1+v));
+    else if(k==="n") S.n=clamp(S.n+v,0,200);
+    else if(k==="l") grow("l",v);
+    else S[k]=clamp(S[k]+v,0,100);
+  }
+  if(o.n>0) grow("eq",o.n*.2); if(o.b>0) grow("eq",o.b*.15); if(o.e>0) grow("body",o.e*.12); if(o.ot>0) grow("body",-o.ot*.4);
+}
+function sched(id,yrs){ S.chains.push({id,age:S.age+yrs}); }
+function ach(id){ S.ach[id]=1; }
+function mile(t){ S.ms.push({age:S.age,t}); }
+
+/* ================= events ================= */
+const EV = [
+{id:"onboard",z:"lobby",once:1,c:s=>s.age===22,t:"報到第一天",d:"人資喵遞給你識別證、一台筆電，還有一份 80 頁的資安規範。",o:[
+  {t:"主動跟每位同事打招呼",f:{n:6,h:3,x:{zen:1}},m:"大家都記住了新來的喵。"},
+  {t:"先把 SQL 環境架起來",f:{p:4,x:{sql:2}},m:"第一天就連上資料倉儲，前輩點頭。"},
+  {t:"默默坐著等人帶",f:{h:-2,x:{gov:1}},m:"沒人來帶你，倒是把資安規範讀完了。"}]},
+{id:"urgent",z:"boss",t:"明早九點的董事會報表",d:"主管 17:50 走過來：「明天一早要給董事會，辛苦了。」",o:[
+  {t:"寫自動化排程跑數",r:["sql",2],f:{p:8,e:-2,x:{sql:2}},m:"排程跑完，你準時下班，主管很驚豔。"},
+  {t:"談好先交摘要版",r:["talk",2],f:{p:4,b:3,x:{talk:1}},m:"主管覺得摘要版更好讀。"},
+  {t:"熬夜手工跑",f:{p:5,e:-10,ot:3},m:"凌晨兩點交件，眼睛快睜不開。"},
+  {t:"隨便交差",f:{p:-8,b:-6,h:2},m:"董事問了一題，主管答不出來，臉很臭。"}]},
+{id:"excel",z:"desk",t:"47 個 Excel 要合併",d:"業務喵丟來一個資料夾：「幫我合成一張，今天要。」",o:[
+  {t:"寫腳本一鍵合併",r:["ai",1],f:{p:5,x:{ai:1,sql:1}},m:"十分鐘搞定，業務喵以為你是神。"},
+  {t:"找實習喵一起做",f:{n:3,e:-4,x:{pm:1}},m:"順便教了實習喵幾招。"},
+  {t:"手動複製貼上",f:{p:2,e:-9,ot:2},m:"貼到第 39 個檔案時，你開始懷疑貓生。"}]},
+{id:"dirty",z:"desk",t:"客戶資料一半是空值",d:"模型要用的關鍵欄位，有 52% 是空的。",o:[
+  {t:"建立資料品質檢核規則",r:["gov",2],f:{p:7,x:{gov:2}},m:"上游系統終於把來源資料修好了。"},
+  {t:"回報給資料擁有者",f:{b:2,p:2,x:{gov:1}},m:"對方說會處理。三個月後，還在處理。"},
+  {t:"自己補值湊數字",f:{p:5},fn:()=>{sched("audit",2)},m:"報表很漂亮。只是……數字是你補的。"}]},
+{id:"dash",z:"desk",t:"業務單位要一張 Dashboard",d:"需求只有一句話：「要很炫，老闆會看。」",o:[
+  {t:"做互動式 BI 儀表板",r:["bi",2],f:{p:7,n:3,x:{bi:2}},m:"老闆每天早上都打開它。"},
+  {t:"先問清楚要解決什麼問題",r:["talk",1],f:{p:5,x:{talk:1,fin:1}},m:"原來他們只需要三個數字。"},
+  {t:"照抄去年那張改日期",f:{p:-3,h:1},m:"業務喵：「欸，這不是去年那張嗎？」"}]},
+{id:"slowsql",z:"server",t:"你的 SQL 拖垮了資料庫",d:"一支查詢跑了 6 小時，全行的報表都卡住了。",o:[
+  {t:"看執行計畫、加索引調校",r:["sql",3],f:{p:6,x:{sql:2}},m:"從 6 小時降到 40 秒，DBA 喵來拜師。"},
+  {t:"找 DBA 喵求救",f:{n:2,b:-2,x:{sql:1}},m:"DBA 喵幫你改好，順便唸了你十分鐘。"},
+  {t:"改到半夜偷偷跑",f:{e:-8,ot:2,p:-2},m:"白天沒人發現，你的黑眼圈發現了。"}]},
+{id:"kpi",z:"meet",t:"KPI 定義又改了",d:"策略部宣布：三年來的報表口徑全部要重算。",o:[
+  {t:"整理一份指標字典",r:["gov",1],f:{p:6,n:2,x:{gov:2}},m:"之後誰再改口徑，都得先查你的字典。"},
+  {t:"排出重算時程表",r:["pm",1],f:{p:4,x:{pm:1}},m:"大家照時程走，沒人爆炸。"},
+  {t:"默默加班重算",f:{p:3,e:-8,ot:2},m:"算完那天，口徑又改了。"}]},
+{id:"aitool",z:"train",t:"部門導入 AI 助理",d:"公司開通了生成式 AI 工具，但大家都在觀望。",o:[
+  {t:"帶頭寫提示詞範本分享",r:["ai",1],f:{p:5,n:4,x:{ai:2,talk:1}},m:"你的範本被轉傳到其他部門。"},
+  {t:"先拿來寫週報試試",f:{h:3,x:{ai:1}},m:"週報從 30 分鐘變 5 分鐘。"},
+  {t:"不碰，覺得不可靠",f:{},m:"同事用 AI 準時下班，你還在打字。"}]},
+{id:"drift",z:"desk",c:s=>s.lvl>=1,t:"信用評分模型準度下滑",d:"上線兩年的模型，AUC 一路往下掉。",o:[
+  {t:"重新訓練並加入新特徵",r:["ai",3],f:{p:10,x:{ai:2,fin:1}},m:"新模型上線，逾放比下降。"},
+  {t:"寫分析報告說明原因",r:["talk",2],f:{p:5,b:2,x:{fin:1}},m:"風控長覺得你講得很清楚。"},
+  {t:"假裝沒看到",f:{p:-6},m:"半年後被風控發現，會議很尷尬。"}]},
+{id:"regulator",z:"boss",t:"主管機關要的申報資料",d:"三天內要交，欄位定義跟內部系統完全對不上。",o:[
+  {t:"用資料血緣快速對應",r:["gov",2],f:{p:8,b:4,x:{gov:2}},m:"提前一天交件，法遵喵請你喝咖啡。"},
+  {t:"拆工作、分配給全組",r:["pm",2],f:{p:6,x:{pm:2}},m:"大家分工合作，準時交件。"},
+  {t:"一個人扛到底",f:{p:4,e:-12,ot:3},m:"交件了，你也只剩半條命。"}]},
+{id:"fraud",z:"desk",t:"一筆奇怪的交易模式",d:"同一個 IP，凌晨在 30 個帳戶之間來回轉帳。",o:[
+  {t:"深入追查關聯帳戶",r:["sql",2],f:{p:6,x:{fin:2,sql:1}},fn:()=>{sched("fraudR",1)},m:"你把可疑名單整理好交給風控。"},
+  {t:"回報風控部門",f:{p:2,b:1,x:{fin:1}},m:"風控說謝謝，之後就沒消息了。"},
+  {t:"下班了，明天再說",f:{h:1},m:"隔天那 30 個帳戶都被清空了。"}]},
+{id:"meeting",z:"meet",t:"三小時沒有結論的會議",d:"白板寫滿了字，但沒有人知道下一步是什麼。",o:[
+  {t:"站起來整理結論與分工",r:["pm",2],f:{p:5,b:3,x:{pm:1,talk:1}},m:"會議提早 40 分鐘結束，大家感激你。"},
+  {t:"用玄學看懂誰說了算",r:["zen",2],f:{b:4,x:{zen:1}},m:"你只附和對的那隻貓。"},
+  {t:"在筆記本上畫貓爪",f:{h:1,e:-3},m:"三小時，畫了 212 個貓爪。"}]},
+{id:"present",z:"meet",t:"向副總簡報分析結果",d:"你只有 10 分鐘，副總只看得懂圖。",o:[
+  {t:"用一張圖說完故事",r:["bi",2],f:{p:9,b:5,x:{bi:1,talk:1}},m:"副總：「這張圖我要帶去董事會。」"},
+  {t:"先講結論再講數字",r:["talk",2],f:{p:7,b:4,x:{talk:2}},m:"副總點了三次頭。"},
+  {t:"照著 42 頁投影片念",f:{p:-4,b:-3,x:{talk:1}},m:"念到第 9 頁，副總開始看手機。"}]},
+{id:"blame",z:"meet",t:"專案延誤，大家在找戰犯",d:"新人喵小心地看著你，延誤其實是他算錯的。",o:[
+  {t:"拿出時間軸，對事不對貓",r:["pm",1],f:{p:3,b:2,x:{pm:1}},m:"大家把焦點放回怎麼補救。"},
+  {t:"幫新人喵扛下來",f:{p:-6,h:3,n:4},fn:()=>{sched("payback",4)},m:"新人喵紅著眼眶說謝謝。"},
+  {t:"推給系統太慢",f:{b:-2},m:"資訊部喵記住了你。"}]},
+{id:"cross",z:"meet",t:"業務和風控吵起來了",d:"兩邊都說數字是對的，要你來當裁判。",o:[
+  {t:"攤開資料口徑逐項對齊",r:["fin",2],f:{p:7,n:5,x:{fin:1,gov:1}},m:"原來兩邊算的是不同日期。"},
+  {t:"約兩邊喝咖啡私下喬",r:["talk",2],f:{n:6,b:2,x:{talk:1,zen:1}},m:"咖啡喝完，架也吵完了。"},
+  {t:"兩邊都說對",f:{h:-2},m:"兩邊都不太爽你。"}]},
+{id:"gossip",z:"pantry",t:"茶水間八卦：要改組了",d:"聽說數據部要跟資訊部合併。",o:[
+  {t:"用玄學解讀高層動向",r:["zen",1],f:{b:3,l:3,x:{zen:1}},m:"你先一步調整了工作重點。"},
+  {t:"打聽一下細節",f:{n:2,x:{zen:1}},m:"聽到五個版本，每個都不一樣。"},
+  {t:"專心泡咖啡",f:{h:1},m:"今天的拿鐵拉花是貓頭。"}]},
+{id:"crush",z:"pantry",c:s=>!s.flags.dating&&!s.flags.married&&s.age<45,t:"隔壁部門的喵對你眨眼",d:"每天 15:00 都會在茶水間遇到。",o:[
+  {t:"約下班吃飯",f:{h:8,m:-1},fn:()=>{S.flags.dating=1;sched("wedding",2)},m:"聊到餐廳打烊。"},
+  {t:"先當好朋友",f:{h:3,n:2},m:"多了一個午餐夥伴。"},
+  {t:"專心工作",f:{p:1},m:"那隻喵後來改到 15:30 才來。"}]},
+{id:"mentor",z:"pantry",once:1,t:"資深前輩邀你喝咖啡",d:"在公司 25 年的前輩說：「有什麼想問的嗎？」",o:[
+  {t:"請教職涯怎麼走",f:{n:5,x:{pm:1,zen:1}},fn:()=>{sched("mentorR",4)},m:"前輩說了很多，你都記下來了。"},
+  {t:"請教金融業務眉角",f:{x:{fin:3}},m:"你終於搞懂授信流程了。"},
+  {t:"聊聊貓砂品牌就好",f:{h:3},m:"獲得一包試用品。"}]},
+{id:"review",z:"boss",t:"年度考績面談",d:"主管拿出一張表格：「我們來聊聊這一年。」",o:[
+  {t:"拿出成果數據爭取加薪",r:["talk",2],fn:()=>S.p>=60?(fx({sal:.08,h:5}),"加薪 8%！主管說你值得。"):(fx({b:-2}),"主管：「績效再好一點我們再談。」")},
+  {t:"討論明年想做的專案",f:{b:4,x:{pm:1}},m:"主管把一個重點專案交給你。"},
+  {t:"點頭說好",f:{},m:"面談 8 分鐘結束。"}]},
+{id:"weekend",z:"home",t:"週六晚上，主管傳訊息",d:"「方便看一下週一的資料嗎？不急。」",o:[
+  {t:"約好週一早上處理",r:["talk",1],f:{h:3,b:1},m:"主管回了一個讚。"},
+  {t:"秒回，馬上處理",f:{b:4,e:-6,h:-3},m:"週末就這樣沒了。"},
+  {t:"已讀不回",f:{h:4,b:-3},m:"週一主管看你的眼神有點複雜。"}]},
+{id:"newboss",z:"boss",t:"換了新主管",d:"新主管喵從外商挖角來，第一句話是：「我要 data-driven。」",o:[
+  {t:"準備一份部門數據現況簡報",r:["bi",1],f:{b:8,p:3,x:{bi:1}},m:"新主管記住你了。"},
+  {t:"觀察風向再說",r:["zen",1],f:{b:3,x:{zen:1}},m:"你發現他其實很在意準時開會。"},
+  {t:"照舊做事",f:{b:-3},fn:()=>{S.b=clamp(S.b-5,0,100)},m:"新主管對你沒什麼印象。"}]},
+{id:"transferAI",z:"boss",once:1,c:s=>s.lvl>=1&&lv("ai")>=2,t:"要不要調去 AI 部門？",d:"AI 部門正在擴編，處長點名要你。",o:[
+  {t:"去！",f:{sal:.1,p:5,x:{ai:3},h:3},m:"新部門、新挑戰，薪水也多了 10%。"},
+  {t:"留在原部門深耕",f:{b:5,x:{fin:2}},m:"主管很感動。"}]},
+{id:"outage",z:"server",t:"半夜批次跑失敗",d:"早上八點，全行的報表開天窗。",o:[
+  {t:"查 log、找出根因修好",r:["sql",2],f:{p:7,x:{sql:1,gov:1}},m:"九點前全部補跑完成。"},
+  {t:"協調各單位延後使用",r:["talk",1],f:{p:3,n:2},m:"大家多等了一小時，沒有抱怨。"},
+  {t:"打給值班工程師",f:{p:-2,e:-3},m:"值班工程師也在睡。"}]},
+{id:"privacy",z:"desk",t:"同事要你寄客戶資料",d:"「把這份客戶名單寄到我私人信箱，我在家加班用。」",o:[
+  {t:"說明規範並用公司加密空間分享",r:["gov",1],f:{p:4,x:{gov:2}},m:"資料安全，同事也學到了。"},
+  {t:"委婉拒絕",f:{h:-1,x:{gov:1}},m:"同事有點不高興，但你守住了底線。"},
+  {t:"照寄，反正是同事",f:{p:2},fn:()=>{sched("audit",2)},m:"寄出去的那一刻，你有點不安。"}]},
+{id:"phish",z:"desk",t:"一封可疑的郵件",d:"主旨：【緊急】您的年終獎金需重新確認。",o:[
+  {t:"回報資安單位",r:["gov",1],f:{p:3,x:{gov:1}},m:"資安部把你的通報當成教材。"},
+  {t:"直接刪除",f:{},m:"眼不見為淨。"},
+  {t:"點開看看",f:{p:-8,h:-5,l:-5},m:"那是資安部的社交工程演練。你得去上課了。"}]},
+{id:"cert",z:"train",t:"公司補助考證照",d:"教育訓練預算還有剩，主管問誰想報名。",o:[
+  {t:"報名資料分析證照",f:{e:-5,x:{sql:2,bi:2}},m:"考過了，名片多了一行字。"},
+  {t:"報名 AI 應用證照",f:{e:-5,x:{ai:4}},m:"考過了，還被找去分享。"},
+  {t:"今年先休息",f:{h:2,e:3},m:"把時間留給自己。"}]},
+{id:"hack",z:"train",once:1,t:"內部 AI 創新競賽",d:"總獎金 50 萬，冠軍專案可以正式上線。",o:[
+  {t:"組隊參加",r:["ai",2],f:{e:-8,ot:2,x:{ai:2,pm:1}},fn:()=>{sched("innov1",1)},m:"你們的作品拿下第一名！"},
+  {t:"幫別隊整理資料",f:{n:4,x:{sql:1}},m:"別隊得獎時特別感謝你。"},
+  {t:"不參加",f:{h:1},m:"頒獎那天你在茶水間。"}]},
+{id:"teach",z:"train",t:"被指派當 Data Literacy 講師",d:"要教 200 隻非技術背景的同事看懂數據。",o:[
+  {t:"用貓罐頭比喻講解 SQL",r:["talk",2],f:{n:10,p:5,x:{talk:2}},m:"課後滿意度 4.9 分。"},
+  {t:"答應，照課本教",f:{n:4,e:-4,x:{talk:1}},m:"有一半的學員睡著了。"},
+  {t:"推給別人",f:{b:-2},m:"主管把這件事記在小本本上。"}]},
+{id:"tired",z:"roof",c:s=>s.e<40,t:"天台的晚風",d:"你站在頂樓，覺得好累好累。",o:[
+  {t:"請一週假好好休息",f:{e:25,h:6,p:-3},m:"回來時，世界還在，你也還在。"},
+  {t:"找公司的員工協助資源",f:{e:15,h:8},m:"談完之後，肩膀輕了一點。"},
+  {t:"再撐一下就好",f:{e:-5,p:2},m:"「再一下」已經說了三個月。"}]},
+{id:"sunset",z:"roof",t:"加班到看見夕陽",d:"天台的夕陽把整座喵島染成橘色。",o:[
+  {t:"拍照傳給家人",f:{h:4},m:"家人回：「早點回家。」"},
+  {t:"想想十年後的自己",f:{h:2,x:{zen:1}},fn:()=>{if(!S.flags.side&&S.age<50){S.flags.side=1;sched("sideR",2);return "你決定開始一個 side project。"}},m:"想了很久，沒有答案。"},
+  {t:"回去繼續加班",f:{p:2,e:-4,ot:1},m:"夕陽很美，但報表還沒好。"}]},
+{id:"head",z:"lobby",c:s=>s.age>=25&&s.track==="corp",t:"獵頭喵來電",d:"「有家數位銀行，年薪多三成，有興趣嗎？」",o:[
+  {t:"拿 offer 回去談加薪",r:["talk",2],fn:()=>{if(R()<.6){fx({sal:.15,b:-2});return "公司留下你，加薪 15%。"} fx({b:-5});return "主管說：「那你去吧。」幸好你沒去。"}},
+  {t:"跳槽！",fn:()=>jobHop()},
+  {t:"婉拒",f:{b:1},m:"獵頭喵說：「有需要再找我。」"}]},
+{id:"startup",z:"lobby",once:1,c:s=>s.age>=27&&s.age<=45&&s.track==="corp",t:"同學找你創業",d:"「我們來做金融數據 SaaS，你當技術長。」",o:[
+  {t:"辭職 all in",fn:()=>{S.track="startup";S.flags.tried=1;S.yrsAtLvl=0;mile("離開喵喵金控，創業了");sched("startupR",2);return "你遞出辭呈，帶走了一盆貓草。"}},
+  {t:"週末當兼職顧問",f:{m:20,e:-6,x:{pm:1,fin:1}},m:"多了點收入，少了點睡眠。"},
+  {t:"婉拒",f:{},m:"三年後，你在新聞上看到那家公司。"}]},
+{id:"expat",z:"lobby",once:1,c:s=>s.lvl>=2&&s.track==="corp",t:"海外分行需要數據人才",d:"東南亞分行要建資料平台，任期三年。",o:[
+  {t:"出發！",f:{sal:.35,h:-3,n:8,x:{fin:2,pm:1}},fn:()=>{S.flags.expat=1;mile("外派海外分行");sched("expatR",3)},m:"你帶著一箱貓罐頭出國了。"},
+  {t:"推薦學弟妹去",f:{n:5},m:"學弟妹在海外過得很好。"},
+  {t:"不去",f:{},m:"機會給了別隻喵。"}]},
+{id:"intern",z:"desk",c:s=>s.lvl>=1,t:"帶實習喵",d:"實習喵什麼都想學，問題一天 40 個。",o:[
+  {t:"認真帶，教他寫 SQL",f:{n:5,e:-4,x:{pm:1,talk:1}},m:"實習喵畢業後回來當你的同事。"},
+  {t:"給他一份清楚的任務清單",r:["pm",2],f:{p:4,x:{pm:1}},m:"他自己完成了一個小專案。"},
+  {t:"丟給他整理檔案",f:{},m:"實習喵在心得裡沒有提到你。"}]},
+{id:"kitten",z:"home",c:s=>s.flags.married&&s.kids<2&&s.age<45,t:"家裡要有小貓了",d:"另一半看著驗孕棒，兩隻喵都愣住了。",o:[
+  {t:"迎接小貓！",f:{h:12,e:-8},fn:()=>{S.kids++;ach("kitten");mile("小貓出生了")},m:"從此你的手機桌布都是牠。"},
+  {t:"再等幾年",f:{},m:"你們決定先存點錢。"}]},
+{id:"parents",z:"home",c:s=>s.age>=35,t:"爸媽住院了",d:"醫生說要住院兩週，後續還需要照顧。",o:[
+  {t:"請假陪伴照顧",f:{h:2,e:-6,p:-3,m:-15},m:"媽媽握著你的手說：「有你真好。」"},
+  {t:"出錢請看護",f:{m:-40},m:"錢花了，但你每天下班都去看他們。"},
+  {t:"工作太忙，請兄弟姊妹處理",f:{h:-6},m:"家族群組安靜了好幾天。"}]},
+{id:"tip",z:"pantry",t:"同事在群組報明牌",d:"「這檔 AI 概念股下週一定漲停！」",o:[
+  {t:"開始定期定額 ETF",fn:()=>{S.flags.dca=1;return "你設定每月自動扣款，從此不看盤。"}},
+  {t:"拿存款梭哈",fn:()=>{const bet=Math.max(0,S.cash*.5);if(R()<.3){S.cash+=bet;S.h=clamp(S.h+8,0,100);return "漲停！帳面賺了 "+fmt(bet)+"。"}S.cash-=bet*.6;S.h=clamp(S.h-8,0,100);return "隔週跌停，虧了 "+fmt(bet*.6)+"。"}},
+  {t:"已讀不回",f:{},m:"後來那檔股票下市了。"}]},
+{id:"lotto",z:"pantry",t:"部門揪團買樂透",d:"每隻喵出 200 元，頭獎 8 億。",o:[
+  {t:"加一！",f:{m:-.02,n:1},fn:()=>R()<.04+S.l/2000?(fx({m:30,h:10}),"中了貳獎！每隻喵分到 30 萬。"):null,m:"沒中，但大家一起難過也很好玩。"},
+  {t:"不跟",f:{},m:"你守住了 200 元。"}]},
+{id:"oncall",z:"home",t:"凌晨三點的告警簡訊",d:"「資料管線異常，請值班人員處理。」",o:[
+  {t:"遠端連線三分鐘修好",r:["sql",3],f:{p:4,e:-2},m:"修好後倒頭繼續睡。"},
+  {t:"爬起來處理",f:{p:2,e:-8},m:"處理完天都亮了。"},
+  {t:"假裝沒看到",f:{p:-6,b:-4},m:"早上主管的訊息比告警還可怕。"}]},
+{id:"replace",z:"boss",t:"老闆問：AI 會取代你嗎？",d:"總經理在走廊攔住你，認真地問。",o:[
+  {t:"展示你用 AI 提升的產能",r:["ai",2],f:{b:8,p:5},m:"總經理：「那你來教全公司。」"},
+  {t:"說明人與 AI 的分工",r:["talk",2],f:{b:5,x:{talk:1}},m:"總經理覺得很有道理。"},
+  {t:"緊張到說不出話",f:{b:-2,h:-2},m:"總經理拍拍你的肩膀走了。"}]},
+{id:"talk",z:"lobby",c:s=>s.lvl>=2,t:"受邀在研討會分享",d:"金融科技年會邀你分享數據治理實務。",o:[
+  {t:"準備精彩的案例分享",r:["talk",2],f:{n:12,p:5,x:{talk:1,gov:1}},m:"會後排了一列喵要跟你換名片。"},
+  {t:"上台照稿念",f:{n:4},m:"台下有些喵在滑手機。"},
+  {t:"婉拒",f:{},m:"機會給了別家公司的喵。"}]},
+{id:"budget",z:"meet",c:s=>s.lvl>=3,t:"年度預算砍兩成",d:"財務喵說：「數據部要提出節省方案。」",o:[
+  {t:"用數據證明部門的投資報酬",r:["fin",2],f:{p:8,b:5,x:{fin:1}},m:"預算只砍了 5%。"},
+  {t:"重新排序專案優先順序",r:["pm",2],f:{p:5,x:{pm:1}},m:"砍掉的都是本來就沒人用的報表。"},
+  {t:"平均砍",f:{h:-3,p:-2},m:"每個組都很不開心。"}]},
+{id:"team",z:"meet",c:s=>s.lvl>=3,t:"兩位組員吵起來了",d:"一個要用新技術，一個說舊的比較穩。",o:[
+  {t:"分別約談，讓他們自己找共識",r:["talk",2],f:{p:5,h:2,x:{talk:1,pm:1}},m:"最後他們一起寫了一份比較報告。"},
+  {t:"用一個小實驗決定",r:["pm",2],f:{p:6,x:{pm:1}},m:"數據說話，大家都服氣。"},
+  {t:"直接拍板",f:{p:2,h:-2},m:"其中一位組員開始更新履歷。"}]},
+{id:"mid",z:"roof",once:1,c:s=>s.age>=40&&s.age<=46,t:"40 歲的天台",d:"你看著樓下的新人，想起 22 歲的自己。",o:[
+  {t:"去讀在職碩士",f:{m:-40,e:-8,x:{ai:3,fin:2},n:6},m:"兩年後畢業，同學都是各行各業的喵。"},
+  {t:"開始運動、照顧身體",f:{e:20,h:5},m:"你跑完了人生第一場半馬。"},
+  {t:"繼續往前走",f:{},m:"日子照舊，也挺好的。"}]},
+{id:"health",z:"home",c:s=>s.age>=35,t:"健康檢查紅字",d:"報告上有三個紅字，醫生說要注意。",o:[
+  {t:"開始規律運動",f:{e:12,h:3,m:-2},m:"三個月後，紅字少了兩個。"},
+  {t:"改成準時下班",f:{e:8,p:-2},fn:()=>{S.otBase=Math.max(0,S.otBase-1)},m:"你開始在六點關電腦。"},
+  {t:"再說吧",f:{e:-6},m:"報告被塞進抽屜。"}]},
+{id:"cafe",z:"roof",once:1,c:s=>s.age>=48,t:"開一間貓咖啡廳的夢",d:"你在筆記本上畫了店面草圖。",o:[
+  {t:"週末先擺攤試試",f:{h:10,m:-10,e:-4},m:"第一天就賣完了 40 杯拿鐵。"},
+  {t:"存進退休計畫裡",f:{h:4},m:"「等退休再說。」你這樣告訴自己。"}]},
+
+/* ---- 時代大事件 ---- */
+{id:"genai",z:"train",era:1,win:[23,30],t:"🌊 生成式 AI 浪潮",d:"全金融業都在問：AI 能幫我們做什麼？",o:[
+  {t:"用 AI 改造現有報表流程",r:["sql",2],f:{p:10,x:{ai:3}},m:"整組的工時少了三成。"},
+  {t:"全力自學 AI",f:{e:-8,x:{ai:6}},m:"你成了部門裡最懂 AI 的喵。"},
+  {t:"觀望一下",fn:()=>{S.flags.lagAI=1},m:"大家都在學，你還在等。"}]},
+{id:"cloud",z:"server",era:1,win:[26,38],t:"🌊 核心系統上雲",d:"三十年的主機系統要搬上雲端。",o:[
+  {t:"自願加入遷移專案",r:["sql",2],f:{p:10,n:5,ot:2,x:{sql:2,pm:1}},m:"上線那天，你是慶功宴的主角。"},
+  {t:"在旁邊學習",f:{x:{sql:1,gov:1}},m:"你學會了雲端資料倉儲。"},
+  {t:"覺得舊的比較好",f:{p:-5},m:"新系統上線後，你的舊程式都不能跑了。"}]},
+{id:"pandemic",z:"home",era:1,win:[24,45],t:"🌊 世紀疫情，全面遠距",d:"辦公室空了，大家在家上班。",o:[
+  {t:"建立線上協作流程",r:["pm",2],f:{p:8,b:4,x:{pm:2}},m:"你的流程後來變成公司標準。"},
+  {t:"在家效率爆表",f:{h:6,e:6},m:"省下的通勤時間都拿來睡覺。"},
+  {t:"邊開會邊追劇",f:{h:6,p:-6},m:"有一次忘了關麥克風。"}]},
+{id:"crash",z:"pantry",era:1,win:[28,55],t:"🌊 金融海嘯，股市大跌",d:"一週跌掉三成，新聞每天都在報。",pre:()=>{S.stock*=.7},o:[
+  {t:"逢低加碼",fn:()=>{const a=Math.max(0,S.cash*.5);S.cash-=a;S.stock+=a;S.rebound=3;return "你把一半存款投入市場。"}},
+  {t:"抱緊處理",fn:()=>{S.rebound=3;return "你刪掉了看盤 App。"}},
+  {t:"恐慌殺出",fn:()=>{S.cash+=S.stock;S.stock=0;S.h=clamp(S.h-6,0,100);return "全部賣光，晚上終於睡得著。"}}]},
+{id:"merger",z:"boss",era:1,win:[32,58],t:"🌊 公司合併，部門整併",d:"喵喵金控要和另一家金控合併，人力要精簡。",o:[
+  {t:"用數據證明團隊價值",r:["bi",2],f:{p:8,b:5},m:"你的團隊完整保留下來。"},
+  {t:"爭取優退方案",c:s=>s.age>=45,fn:()=>{S.cash+=S.salary*1.5;S.salary=Math.round(S.salary*.8);S.yrsAtLvl=0;mile("領了優退金，轉換跑道");return "領了一筆優退金，換到一家小公司。"}},
+  {t:"低調祈禱",fn:()=>S.p<50?(fx({p:-10,h:-10}),"你被調到冷門單位。"):"你安全過關了。"}]},
+{id:"aireg",z:"boss",era:1,win:[30,55],t:"🌊 AI 治理法規上路",d:"金控要成立 AI 治理小組，需要懂資料又懂法規的喵。",o:[
+  {t:"加入治理小組",r:["gov",2],f:{b:6,p:8,x:{gov:2}},fn:()=>{S.boost=1},m:"你成了高層眼中的關鍵人物。"},
+  {t:"提供分析協助",f:{x:{gov:2}},m:"你學到很多法規知識。"},
+  {t:"沒興趣",f:{},m:"小組成員後來都升官了。"}]},
+
+/* ---- 劇情鏈 ---- */
+{id:"audit",z:"boss",chain:1,t:"📎 稽核喵找上門",d:"「兩年前的那份資料，可以說明一下嗎？」",o:[
+  {t:"坦白並補正",f:{p:-8,b:-4,h:3},fn:()=>{ach("audit")},m:"稽核喵說：「謝謝你的誠實。」"},
+  {t:"說是系統問題",fn:()=>{ach("audit");if(R()<.45)return (fx({h:-3}),"這次過關了，但你睡不太好。");fx({p:-25,b:-15,h:-8});mile("稽核報告上有你的名字");return "稽核喵調出了紀錄。這次很難看。"}}]},
+{id:"payback",z:"boss",chain:1,t:"🤝 當年的新人喵升官了",d:"你幫他扛錯的那隻喵，現在是別部門的經理。",o:[
+  {t:"「恭喜你！」",f:{n:10,b:5},fn:()=>{S.boost=1},m:"他在高層會議上幫你說了好話。"}]},
+{id:"fraudR",z:"lobby",chain:1,t:"🕵️ 詐騙集團被一網打盡",d:"你追查的那批帳戶，牽出一整個集團。",o:[
+  {t:"上台領年度表揚",f:{p:12,b:6,h:8,sal:.05},fn:()=>{ach("fraud");mile("抓到詐騙集團，獲年度表揚")},m:"全公司都知道你的名字了。"}]},
+{id:"innov1",z:"meet",chain:1,t:"🚀 競賽作品要正式上線",d:"冠軍專案進入正式開發，需要一隻喵帶頭。",o:[
+  {t:"帶頭推動上線",r:["pm",2],f:{p:6,e:-6,ot:2,x:{pm:2}},fn:()=>{sched("innov2",2)},m:"你成了專案負責人。"},
+  {t:"交給資訊部",f:{p:2},m:"專案上線了，名單上沒有你。"}]},
+{id:"innov2",z:"lobby",chain:1,t:"🥇 年度創新大獎",d:"你帶的專案每年替公司省下 3000 萬。",o:[
+  {t:"上台領獎",f:{p:15,b:8,h:10,m:20},fn:()=>{S.boost=1;ach("innov");mile("拿下年度創新大獎")},m:"頒獎時，你想起熬夜比賽的那晚。"}]},
+{id:"wedding",z:"home",chain:1,c:s=>s.flags.dating&&!s.flags.married,t:"💕 要不要結婚？",d:"交往兩年的喵問你：「我們要不要一起過下去？」",o:[
+  {t:"求婚！",f:{h:15,m:-50},fn:()=>{S.flags.married=1;S.flags.dating=0;ach("wed");mile("結婚了，喜宴辦在喵島頂樓")},m:"兩隻喵在天台交換了戒指。"},
+  {t:"再等等",fn:()=>{sched("wedding",2)},m:"對方說：「好，我等你。」"},
+  {t:"分手",f:{h:-12},fn:()=>{S.flags.dating=0},m:"茶水間的 15:00 變得很安靜。"}]},
+{id:"startupR",z:"lobby",chain:1,t:"🚀 創業的關鍵一年",d:"資金快燒完了，投資人在等你的數字。",o:[
+  {t:"全力衝刺",fn:()=>startupResult()}]},
+{id:"expatR",z:"lobby",chain:1,t:"🌏 外派任期結束",d:"你帶著三年的海外經驗回國了。",o:[
+  {t:"回到喵島",f:{n:10,b:6},fn:()=>{S.flags.returned=1;S.boost=1;ach("world");mile("外派歸國")},m:"總部為你準備了新位置。"}]},
+{id:"mentorR",z:"pantry",chain:1,t:"☕ 前輩要退休了",d:"退休前，前輩把你推薦給了高層。",o:[
+  {t:"謝謝前輩",f:{b:8,n:6,h:4},fn:()=>{S.boost=1},m:"前輩說：「換你帶新人了。」"}]},
+{id:"sideR",z:"home",chain:1,t:"💡 side project 的結果",d:"你下班後做的小工具上線了。",o:[
+  {t:"看看反應",fn:()=>{const sc=lv("ai")+lv("bi")+S.l/30+R()*3;if(sc>=6){const g=ri(80,400);S.cash+=g;S.h=clamp(S.h+10,0,100);mile("side project 爆紅");return "爆紅了！被一家公司買走，進帳 "+g+" 萬。"}S.h=clamp(S.h-2,0,100);return "只有 12 個使用者，其中 3 個是你家的貓。"}}]}
+];
+const PASSIVE = [
+  {t:"尾牙抽到一年份的貓罐頭。",f:{h:4}},
+  {t:"颱風假，在家睡到自然醒。",f:{e:6,h:3}},
+  {t:"冷氣壞了，整層樓一起流汗。",f:{e:-3}},
+  {t:"系統升級，週末要待命。",f:{e:-5,ot:1}},
+  {t:"收到業務喵的感謝信。",f:{h:3,p:2}},
+  {t:"部門聚餐去唱 KTV。",f:{n:2,h:2}},
+  {t:"新同事來問你 SQL 怎麼寫。",f:{x:{talk:1,sql:1}}},
+  {t:"統一發票中了 200 元。",f:{m:.02,h:1}},
+  {t:"主管在大群組公開稱讚你。",c:()=>S.p>60,f:{h:4,b:2}},
+  {t:"年終獎金入帳。",c:()=>S.p>55,fn:()=>{const b=Math.round(S.salary*.15);S.cash+=b;return "年終獎金入帳 "+b+" 萬。"}},
+  {t:"AI 自動化了你一半的工作，主管開始重新分配任務。",c:()=>S.flags.lagAI&&S.age>=30,f:{p:-10,h:-4},once:1}
+];
+
+/* ================= background ================= */
+function makeBackground(){
+  const fam = pick([
+    {n:"小康之家",d:"家裡支持你，但沒有多餘的錢。",cash:20,h:0},
+    {n:"單親家庭",d:"從小就很獨立，抗壓性高。",cash:5,e:10},
+    {n:"家裡有礦",d:"爸媽說：「工作開心就好。」",cash:300,h:5},
+    {n:"需要負擔家計",d:"每月要拿一部分薪水回家。",cash:0,fam:1}]);
+  const major = pick([
+    {n:"統計系",x:{sql:4,bi:3}},{n:"資工系",x:{sql:4,ai:4}},{n:"財金系",x:{fin:6,bi:1}},
+    {n:"數學系",x:{ai:4,sql:2}},{n:"外文系（自學轉職）",x:{talk:5,zen:2,sql:1}}]);
+  const exp = pick([
+    {n:"Kaggle 競賽得獎",x:{ai:3}},{n:"系學會會長",x:{talk:2,pm:3},n2:8},{n:"書卷獎常客",p:10},
+    {n:"延畢一年去環島",h:8,l:10},{n:"銀行暑期實習",x:{fin:3},n2:5}]);
+  const per = pick([
+    {n:"卷王",d:"習慣加班，績效好但容易累",p:6,ot:1},{n:"佛系",d:"不爭不搶，比較快樂",h:10,p:-4},
+    {n:"社恐",d:"一對一很強，上台會發抖",talk:-1},{n:"話癆",d:"跟誰都聊得來",n2:6},{n:"夜貓子",d:"晚上才有靈感",ot:1,e:5}]);
+  const cap = {};
+  SKK.forEach(k=>{const r=R();cap[k]=r<.12?1:r<.35?2:r<.65?3:r<.88?4:5});
+  const strong = pick(Object.keys(major.x)); cap[strong]=Math.max(cap[strong],4);
+  if(per.talk) cap.talk=Math.max(1,cap.talk+per.talk);
+  return {fam,major,exp,per,cap};
+}
+
+/* ================= init ================= */
+function initState(name,seed,breed){
+  R = mulberry(hashStr(seed));
+  const bg = makeBackground();
+  S = {name,seed,bg,age:START_AGE,cash:bg.fam.cash,stock:0,house:0,mortLeft:0,mortPay:0,
+    e:clamp(80+(bg.fam.e||0)+(bg.per.e||0),0,100),h:clamp(60+(bg.fam.h||0)+(bg.exp.h||0)+(bg.per.h||0),0,100),
+    p:clamp(50+(bg.exp.p||0)+(bg.per.p||0),0,100),b:50,n:10+(bg.exp.n2||0)+(bg.per.n2||0),l:50+(bg.exp.l||0),
+    xp:{},cap:bg.cap,lvl:0,yrsAtLvl:0,salary:LADDER[0][1],track:"corp",flags:{},chains:[],used:{},seen:{},
+    ms:[],hist:[],ot:0,otBase:bg.per.ot||0,leaveSum:0,leaveN:0,dice:2,acted:false,asp:null,jobHops:0,kids:0,
+    ach:{},boost:0,rebound:0,era:{},yt:0,cur:null,chosen:true,passive:null,ended:false,paused:false,famLoad:bg.fam.fam?12:0};
+  SKK.forEach(k=>S.xp[k]=0);
+  for(const k in bg.major.x) S.xp[k]+=bg.major.x[k];
+  if(bg.exp.x) for(const k in bg.exp.x) S.xp[k]+=bg.exp.x[k];
+  S.iq=Math.round(rnd(92,128)); S.eq=Math.round(rnd(30,72)); S.l=Math.round(rnd(25,80))+(bg.exp.l||0); S.body=Math.round(rnd(40,85));
+  if(bg.fam.n==="單親家庭") S.eq+=6; if(bg.fam.n==="家裡有礦") S.l+=6; if(bg.exp.n==="書卷獎常客") S.iq+=5; if(bg.exp.n==="系學會會長") S.eq+=6; if(bg.exp.n==="延畢一年去環島") S.body+=6;
+  S.acap={iq:Math.min(160,S.iq+ri(8,26)),eq:Math.min(100,S.eq+ri(10,32)),l:Math.min(100,S.l+ri(4,18)),body:Math.min(100,S.body+ri(6,22))};
+  S.breed=BREEDS[breed]?breed:"orange"; BREEDS[S.breed].fx(S);
+  ["e","h","p"].forEach(k=>S[k]=clamp(S[k],0,100));
+  AKK.forEach(k=>{S[k]=clamp(S[k],ATTR[k][2],ATTR[k][3]); S.acap[k]=Math.max(S.acap[k],Math.min(ATTR[k][3],S[k]+3));});
+  S.start={iq:S.iq,eq:S.eq,l:S.l,body:S.body};
+  SKK.forEach(k=>S.xp[k]=Math.min(S.xp[k],XP_LV[S.cap[k]]));
+  // plan era events
+  EV.filter(e=>e.era).forEach(e=>{ if(R()<.62){ const a=ri(e.win[0],e.win[1]); if(!S.era[a]) S.era[a]=e.id; } });
+}
+
+/* ================= year loop ================= */
+function eligible(ev){
+  if(ev.chain||ev.era) return false;
+  if(ev.once && S.used[ev.id]) return false;
+  if(S.seen[ev.id]!=null && S.age-S.seen[ev.id]<4) return false;
+  if(ev.c && !ev.c(S)) return false;
+  return true;
+}
+function startYear(){
+  S.yt=0; S.ot=S.otBase; S.acted=false; S.chosen=false; S.cur=null; S.passive=null;
+  let ev=null;
+  const due = S.chains.findIndex(c=>c.age<=S.age && (EV.find(e=>e.id===c.id).c ? EV.find(e=>e.id===c.id).c(S) : true));
+  if(due>=0){ ev=EV.find(e=>e.id===S.chains[due].id); S.chains.splice(due,1); }
+  else if(S.era[S.age]){ ev=EV.find(e=>e.id===S.era[S.age]); }
+  else { const pool=EV.filter(eligible); const onb=pool.find(e=>e.id==="onboard"); ev = onb || pick(pool); }
+  // drop stale chains whose condition no longer holds
+  S.chains=S.chains.filter(c=>c.age>S.age-3);
+  S.fate=rollFate();
+  if(R()<.3){ const pp=PASSIVE.filter(p=>(!p.c||p.c())&&!(p.once&&S.used["p"+p.t])); if(pp.length) S.passive=pick(pp); }
+  if(ev){ if(ev.pre) ev.pre(); S.used[ev.id]=1; S.seen[ev.id]=S.age; showEvent(ev); }
+  else { S.chosen=true; renderIdle(); }
+  renderAll();
+}
+function defaultIdx(ev){ for(let i=ev.o.length-1;i>=0;i--){ if(optOk(ev.o[i])) return i; } return ev.o.length-1; }
+function optOk(o){ if(o.c && !o.c(S)) return false; return !o.r || lv(o.r[0])>=o.r[1]; }
+function choose(i,auto){
+  if(S.chosen||!S.cur) return;
+  const ev=S.cur, o=ev.o[i]; S.chosen=true;
+  const before=snap();
+  if(o.f) fx(o.f);
+  let msg=o.m||"";
+  if(o.fn){ const r=o.fn(); if(typeof r==="string") msg=r; }
+  log(`${ZONES[ev.z].e} ${ev.t.replace(/^[^\u4e00-\u9fffA-Za-z0-9]+\s*/,"")}：${auto?"（來不及決定）":""}${msg}`);
+  reactFx(before);
+  renderResult(ev,o,msg,auto);
+  renderAll();
+}
+function jobHop(){
+  const best=Math.max(lv("sql"),lv("bi"),lv("ai"));
+  if(R()<.25+best*.1+S.p/300+S.iq/1000){ S.salary=Math.round(S.salary*1.28); S.b=50; S.p=50; S.yrsAtLvl=Math.max(0,S.yrsAtLvl-1); S.jobHops++; if(S.jobHops>=3) ach("hop"); mile("跳槽到新公司，年薪 "+S.salary+" 萬"); return "新公司、新同事、新的茶水間。年薪變成 "+S.salary+" 萬。"; }
+  fx({h:-4}); return "面試了三家都沒上，只好繼續待著。";
+}
+function startupResult(){
+  const sc=lv("fin")+lv("pm")+lv("talk")+S.l/25+S.n/40+R()*4;
+  if(sc>=11){ const g=ri(1500,6000); S.cash+=g; S.track="founder"; S.salary=220; ach("found"); mile("公司被大型金控收購，身價 "+fmt(g)); return "成功了！公司被收購，你拿到 "+fmt(g)+"。"; }
+  if(sc>=7){ S.cash+=300; S.track="corp"; S.lvl=Math.min(5,S.lvl+1); S.salary=Math.max(S.salary,LADDER[S.lvl][1]); S.flags.acq=1; mile("新創被併購，回到大公司"); return "公司被併購，你以「"+LADDER[S.lvl][0]+"」身分加入買方。"; }
+  S.cash-=120; S.track="corp"; S.p=40; S.h=clamp(S.h-10,0,100); mile("創業失敗，重回職場"); return "資金燒完了。你收拾好貓草，回到上班族的生活。";
+}
+function endYear(){
+  if(S.cur && !S.chosen) choose(defaultIdx(S.cur),true);
+  if(S.fate) fireFate(); if(S.ended) return;
+  if(S.passive){ const p=S.passive; if(p.once) S.used["p"+p.t]=1; let m=p.t; if(p.f) fx(p.f); if(p.fn){const r=p.fn(); if(r) m=r;} log("🗞️ "+m); S.passive=null; }
+  const leave=Math.min(23.5,18+S.ot);
+  S.leaveSum+=leave; S.leaveN++;
+  // energy & happiness
+  S.e=clamp(S.e+3+S.body/12-S.ot*4-(S.track==="startup"?6:0)-(S.kids?2:0),0,100);
+  S.h=clamp(S.h+(55-S.h)*.14+(S.e>55?1:-3)+(leave<=19?1.5:-2)+(S.flags.married?1:0)+(S.kids?.5:0)-(S.flags.expat&&!S.flags.returned?1:0),0,100);
+  // money
+  const inc = S.track==="startup"?30:S.salary;
+  const rate = inc<100?.07:inc<200?.14:.24;
+  const living = 26+inc*.18+S.kids*12+S.famLoad;
+  let invest=0; if(S.flags.dca){ invest=inc*.15; S.stock+=invest; }
+  if(S.mortLeft>0){ const pay=Math.min(S.mortPay,S.mortLeft); S.cash-=pay*1.15; S.mortLeft-=pay; }
+  S.cash += inc*(1-rate)-living-invest;
+  let r=.06+gauss()*.15; if(S.rebound>0){ r+=.15; S.rebound--; }
+  S.stock=Math.max(0,S.stock*(1+r)+S.stock*.03);
+  S.house*=1.02;
+  // perf, raise
+  if(S.track==="corp"){ if(S.p>=60) S.salary=Math.round(S.salary*1.03); S.yrsAtLvl++; promote(); }
+  S.p=Math.round(S.p+(50-S.p)*.2);
+  if(S.age>=40) grow("body",-.5);
+  // dice
+  if((S.age-START_AGE)%3===2 && S.age<=55){ S.dice+=2; log("🎲 年度教育訓練：獲得 2 顆特訓骰"); }
+  // milestones
+  const t=total();
+  if(t>=1000 && !S.flags.m1000){S.flags.m1000=1;mile("總資產破千萬");S.dice++;}
+  if(t>=10000 && !S.flags.m1e){S.flags.m1e=1;mile("身家破億");ach("rich");}
+  SKK.forEach(k=>{ if(lv(k)===5 && ["sql","bi","ai"].includes(k)) ach("tech5"); });
+  S.hist.push({age:S.age,h:S.h,t:total()});
+  // burnout
+  if(S.e<=0){
+    if(!S.flags.sick){ S.flags.sick=1; S.e=40; S.p=clamp(S.p-15,0,100); log("🔥 身心電量歸零，請了三個月病假。再一次就撐不住了。"); mile("第一次燃燒殆盡"); }
+    else { endGame("burn"); return; }
+  }
+  if(S.age>=RETIRE){ endGame("retire"); return; }
+  S.age++;
+  startYear();
+}
+function promote(){
+  if(S.lvl>=5||S.yrsAtLvl<2) return;
+  const core=Math.max(lv("sql"),lv("bi"),lv("ai"))+Math.max(lv("talk"),lv("pm"))+(S.lvl>=2?(lv("fin")+lv("gov"))/2:0);
+  const need=[2,3,4.5,6,7.5][S.lvl];
+  const pNeed=55+S.lvl*5;
+  if(core>=need && S.p>=pNeed && R()<.34+S.b/300+S.n/600+S.eq/400+(S.boost?.35:0)){
+    S.lvl++; S.yrsAtLvl=0; S.boost=0; S.salary=Math.max(S.salary,LADDER[S.lvl][1]); S.p=55; S.dice++;
+    log("🎉 升遷為「"+LADDER[S.lvl][0]+"」，年薪 "+S.salary+" 萬"); mile("升遷為"+LADDER[S.lvl][0]); celebrate("🎉 升遷！");
+    if(S.lvl===5) ach("cdo");
+  }
+}
+
+/* ================= actions ================= */
+const ACTS = [
+  {t:"請特休去旅行",d:"電量 +25、幸福 +8、花 5 萬",run:()=>{fx({e:25,h:8,p:-3,m:-5});return "你去了一趟沖繩，看了很多海。"}},
+  {t:"考資料分析證照",d:"花 3 萬，SQL、BI 經驗 +2",run:()=>{fx({m:-3,e:-4,x:{sql:2,bi:2}});return "考過了！"}},
+  {t:"考 AI 應用證照",d:"花 3 萬，AI 經驗 +4",run:()=>{fx({m:-3,e:-4,x:{ai:4}});return "考過了！"}},
+  {t:"考金融證照",d:"花 3 萬，金融經驗 +4",run:()=>{fx({m:-3,e:-4,x:{fin:4}});return "考過了！"}},
+  {t:"午餐飯局拓展人脈",d:"人脈 +6，玄學經驗 +1",run:()=>{fx({n:6,e:-3,m:-1,x:{zen:1}});return "認識了法遵、風控和 IT 的喵。"}},
+  {t:"跟主管談加薪",d:"看溝通力與績效",c:()=>S.track==="corp",run:()=>{if(lv("talk")>=2&&S.p>=55&&R()<.6){fx({sal:.06,h:3});return "加薪 6%！"}fx({b:-3});return "主管說：「明年再看看。」"}},
+  {t:"投履歷跳槽",d:"薪水可能 +28%",c:()=>S.age>=24&&S.track==="corp",run:()=>jobHop()},
+  {t:"開始定期定額",d:"每年自動投入薪水 15% 到 ETF",c:()=>!S.flags.dca,run:()=>{S.flags.dca=1;return "設定好了，從此不看盤。"}},
+  {t:"買房（頭期款 450 萬）",d:"房價 1500 萬，房貸 20 年",c:()=>!S.house&&S.cash>=450,run:()=>{S.cash-=450;S.house=1500;S.mortLeft=1050;S.mortPay=52.5;fx({h:6});mile("買了第一間房");return "拿到鑰匙那天，你在空房間裡睡了午覺。"}},
+  {t:"去聯誼",d:"也許會遇到對的喵",c:()=>!S.flags.dating&&!S.flags.married&&S.age<45,run:()=>{if(R()<.45){S.flags.dating=1;sched("wedding",2);fx({h:8});return "遇到一隻很聊得來的喵。"}fx({h:-1});return "吃了一頓好吃的，就這樣。"}},
+  {t:"開始做 side project",d:"兩年後見真章",c:()=>!S.flags.side&&S.age<55,run:()=>{S.flags.side=1;sched("sideR",2);fx({e:-5});return "你開了一個新的 Git repo。"}},
+  {t:"提早退休",d:"總資產 3000 萬以上才能選",c:()=>total()>=3000,run:()=>{endGame("fire");return null}}
+];
+
+/* ================= rendering: island ================= */
+const SVGNS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent){const e=document.createElementNS(SVGNS,tag);for(const k in attrs){const v=String(attrs[k]);if((k==="fill"||k==="stroke")&&v.indexOf("var(")===0)e.style.setProperty(k,v);else e.setAttribute(k,v)}if(parent)parent.appendChild(e);return e}
+const iso=(gx,gy)=>({x:200+(gx-gy)*64,y:92+(gx+gy)*36});
+const mr=(a,b)=>a+Math.random()*(b-a); // 畫面用的亂數，不影響命運種子
+const BREEDS={
+  orange:{n:"橘貓",d:"愛吃也愛笑，幸福感 +6",c:"#F19156",s:"#CF6A2E",pat:"stripe",fx:s=>{s.h+=6}},
+  black:{n:"黑貓",d:"喵島的幸運象徵，運氣 +12",c:"#3A3A3A",s:"#3A3A3A",eye:"#F7D154",fx:s=>{s.l+=12}},
+  calico:{n:"三花貓",d:"人緣超好，人脈 +8",c:"#F6F1E7",s:"#F19156",s2:"#3A3A3A",pat:"calico",fx:s=>{s.n+=8}},
+  tabby:{n:"虎斑貓",d:"耐操耐加班，電量 +10",c:"#A89270",s:"#5E513E",pat:"stripe",fx:s=>{s.e+=10}},
+  tux:{n:"賓士貓",d:"天生穿西裝，溝通經驗 +3",c:"#2F2F2F",s:"#FFFFFF",pat:"tux",eye:"#9BD36A",fx:s=>{s.xp.talk+=3}},
+  siamese:{n:"暹羅貓",d:"聰明又敏感，AI 經驗 +3",c:"#EFE3CF",s:"#5A4636",pat:"point",eye:"#4FA3E0",fx:s=>{s.xp.ai+=3}},
+  bsh:{n:"英短藍貓",d:"穩重可靠，績效 +6",c:"#8C9BAA",s:"#76879A",fx:s=>{s.p+=6}},
+  ragdoll:{n:"布偶貓",d:"溫柔療癒，幸福 +3、電量 +5",c:"#F4F1EC",s:"#8A7560",pat:"point",eye:"#4FA3E0",fx:s=>{s.h+=3;s.e+=5}}
+};
+const BKEYS=Object.keys(BREEDS);
+function catShape(g,bk,isHero){
+  const B=BREEDS[bk], c=B.c, s=B.s;
+  const accent=B.pat==="point"?s:B.pat==="calico"?B.s2:c;
+  el("path",{d:"M-6.5 1 q-6 -1 -5.5 -9",stroke:accent,"stroke-width":2.4,fill:"none","stroke-linecap":"round",class:"tail"},g);
+  const legCol=B.pat==="tux"?"#FFFFFF":B.pat==="point"?s:c;
+  [[-4.6,"leg-a"],[-1.6,"leg-b"],[2,"leg-b"],[4.8,"leg-a"]].forEach(([x,cl])=>el("line",{x1:x,y1:2.5,x2:x,y2:7,stroke:legCol,"stroke-width":2,"stroke-linecap":"round",class:cl},g));
+  el("ellipse",{cx:0,cy:0,rx:7.2,ry:5,fill:c},g);
+  if(B.pat==="stripe") [-3.2,-.2,2.8].forEach(x=>el("path",{d:`M${x} -4.6 q1 2.2 0 4`,stroke:s,"stroke-width":1.3,fill:"none","stroke-linecap":"round"},g));
+  if(B.pat==="calico"){ el("ellipse",{cx:-3,cy:-1.6,rx:3,ry:2.4,fill:s},g); el("ellipse",{cx:2,cy:1.8,rx:2.2,ry:1.7,fill:B.s2},g); }
+  if(B.pat==="tux") el("ellipse",{cx:4.3,cy:1.6,rx:2.8,ry:3,fill:"#FFFFFF"},g);
+  if(isHero){ el("rect",{x:3.4,y:-3.4,width:1.6,height:5.4,rx:.8,fill:"#00558C"},g); el("rect",{x:2.5,y:1.6,width:3.6,height:2.8,rx:.6,fill:"#FFFFFF",stroke:"#00558C","stroke-width":.6},g); }
+  el("polygon",{points:"2.6,-8 3.6,-12.8 6.2,-9.2",fill:accent},g);
+  el("polygon",{points:"6.6,-9.4 9.6,-12.8 10,-7.6",fill:B.pat==="calico"?s:accent},g);
+  el("circle",{cx:6.2,cy:-5,r:4.7,fill:c},g);
+  if(B.pat==="point") el("ellipse",{cx:7.8,cy:-4.2,rx:2.9,ry:2.3,fill:s},g);
+  if(B.pat==="stripe") el("path",{d:"M5 -9.3 l.5 1.8 M6.7 -9.7 l0 1.8",stroke:s,"stroke-width":.9},g);
+  if(B.pat==="tux") el("ellipse",{cx:8.2,cy:-3.3,rx:2.2,ry:1.6,fill:"#FFFFFF"},g);
+  el("circle",{cx:7.9,cy:-5.6,r:.95,fill:B.eye||"#333333",class:"eye"},g);
+  el("circle",{cx:10.6,cy:-4.5,r:.6,fill:"#E79AA8"},g);
+}
+function makeCat(layer,bk,isHero){
+  const g=el("g",{class:"cat"},layer);
+  const flip=el("g",{},g);
+  const bob=el("g",{class:"bob"},flip); bob.style.animationDelay=(-mr(0,1.8)).toFixed(2)+"s";
+  const inner=el("g",{transform:isHero?"scale(1.4)":"scale(1.05)"},bob);
+  catShape(inner,bk,isHero);
+  g._x=200; g._y=150;
+  return g;
+}
+let island=null,cats=[],hero=null,heroTag=null,heroBub=null,nightRect=null,lights=null,sunEl=null,fxLayer=null;
+let titleZones=null,titleCats=[],titleHero=null,titleLayer=null;
+function cloud(svg,y,dur,delay,sc){
+  const g=el("g",{class:"cloud"},svg); g.style.animationDuration=dur+"s"; g.style.animationDelay=delay+"s";
+  const i=el("g",{transform:`translate(0,${y}) scale(${sc})`},g);
+  el("ellipse",{cx:0,cy:0,rx:14,ry:5.5,fill:"var(--cloud)"},i); el("ellipse",{cx:8,cy:-3,rx:8,ry:5.5,fill:"var(--cloud)"},i); el("ellipse",{cx:-7,cy:-2,rx:6.5,ry:4.5,fill:"var(--cloud)"},i);
+}
+function drawIsland(svg,isGame){
+  svg.innerHTML="";
+  el("rect",{x:0,y:0,width:400,height:300,fill:"var(--sea)"},svg);
+  for(let i=0;i<7;i++){ el("path",{d:`M${12+i*58} ${(30+i*91)%262+14} q8 -5 16 0 t16 0`,stroke:"var(--sea2)","stroke-width":2,fill:"none",class:"wave",style:`animation-delay:${-i*.9}s`},svg); }
+  const boat=el("text",{x:0,y:288,"font-size":15,class:"boat"},svg); boat.textContent="⛵";
+  const c=iso(1,1);
+  el("polygon",{points:`${c.x},${c.y-118} ${c.x+196},${c.y} ${c.x},${c.y+118} ${c.x-196},${c.y}`,fill:"var(--sandD)",transform:"translate(0,14)"},svg);
+  el("polygon",{points:`${c.x},${c.y-118} ${c.x+196},${c.y} ${c.x},${c.y+118} ${c.x-196},${c.y}`,fill:"var(--sand)"},svg);
+  el("polygon",{points:`${c.x},${c.y-106} ${c.x+176},${c.y} ${c.x},${c.y+106} ${c.x-176},${c.y}`,fill:"var(--grass)"},svg);
+  const order=Object.keys(ZONES).sort((a,b)=>(ZONES[a].x+ZONES[a].y)-(ZONES[b].x+ZONES[b].y));
+  const zg={}, winPts=[];
+  order.forEach(k=>{
+    const z=ZONES[k],p=iso(z.x,z.y),a=54,b=30,h=z.h;
+    const g=el("g",{class:"zone"},svg);
+    el("polygon",{points:`${p.x-a},${p.y-h} ${p.x},${p.y+b-h} ${p.x},${p.y+b} ${p.x-a},${p.y}`,fill:"var(--left)"},g);
+    el("polygon",{points:`${p.x+a},${p.y-h} ${p.x},${p.y+b-h} ${p.x},${p.y+b} ${p.x+a},${p.y}`,fill:"var(--right)"},g);
+    const top=el("polygon",{points:`${p.x},${p.y-b-h} ${p.x+a},${p.y-h} ${p.x},${p.y+b-h} ${p.x-a},${p.y-h}`,class:"ztop",stroke:"var(--sky)","stroke-width":.6},g);
+    if(h>=12) for(let i=0;i<3;i++){ const x0=p.x+9+i*14, y0=p.y+b-(x0-p.x)*b/a, kk=7*b/a; const pts=`${x0},${y0-h+4} ${x0+7},${y0-h+4-kk} ${x0+7},${y0-4-kk} ${x0},${y0-4}`; el("polygon",{points:pts,fill:"var(--sky)",opacity:.5},g); winPts.push(pts); }
+    const em=el("text",{x:p.x,y:p.y-h-6,"text-anchor":"middle","font-size":17},g); em.textContent=z.e;
+    const nm=el("text",{x:p.x,y:p.y-h+12,"text-anchor":"middle",class:"zname"},g); nm.textContent=z.n;
+    zg[k]={g,top,nm,p,h};
+  });
+  cloud(svg,22,48,-6,1); cloud(svg,52,66,-34,.75); cloud(svg,266,58,-20,.9);
+  const night=el("rect",{x:0,y:0,width:400,height:300,fill:"#06203A",opacity:0,"pointer-events":"none"},svg);
+  const lg=el("g",{opacity:0},svg); winPts.forEach(pt=>el("polygon",{points:pt,fill:"#FFD772"},lg));
+  const sun=el("text",{x:isGame?30:340,y:isGame?36:28,"font-size":18,"text-anchor":"middle"},svg); sun.textContent="☀️";
+  const layer=el("g",{},svg);
+  const fxl=el("g",{},svg);
+  const keys=Object.keys(zg);
+  const npcs=[];
+  for(let i=0;i<5;i++){ const ct=makeCat(layer,BKEYS[Math.floor(Math.random()*BKEYS.length)],false); npcs.push(ct); placeCat(ct,zg[keys[(i*2+1)%keys.length]],false,true); }
+  if(isGame){
+    island=zg; cats=npcs; nightRect=night; lights=lg; sunEl=sun; fxLayer=fxl;
+    hero=makeCat(layer,S.breed,true);
+    heroTag=el("text",{x:0,y:-24,"text-anchor":"middle",class:"hero-tag"},hero);
+    heroBub=el("text",{x:0,y:-36,"text-anchor":"middle","font-size":13},hero);
+    placeCat(hero,zg.desk,true,true);
+  } else { titleZones=zg; titleCats=npcs; titleLayer=layer; titleHero=null; setTitleHero(); }
+  return zg;
+}
+function setTitleHero(){
+  if(!titleLayer) return;
+  const old=titleHero; titleHero=makeCat(titleLayer,chosenBreed,true);
+  if(old){ titleHero._x=old._x; titleHero.style.transform=old.style.transform; old.remove(); placeCat(titleHero,titleZones.desk,true); }
+  else placeCat(titleHero,titleZones.desk,true,true);
+}
+function placeCat(g,z,center,instant){
+  const x=z.p.x+(center?mr(-14,14):mr(-26,26)), y=z.p.y-z.h+(center?mr(-6,4):mr(-10,8))+2;
+  const dx=x-g._x;
+  if(Math.abs(dx)>1) g.firstChild.style.transform=dx<0?"scaleX(-1)":"";
+  g._x=x; g._y=y;
+  const tf=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
+  if(instant){ g.style.transition="none"; g.style.transform=tf; requestAnimationFrame(()=>requestAnimationFrame(()=>{g.style.transition=""})); return; }
+  g.classList.add("walk"); clearTimeout(g._t); g._t=setTimeout(()=>g.classList.remove("walk"),1300);
+  g.style.transform=tf;
+}
+function highlight(zk){
+  for(const k in island){ const on=k===zk; island[k].top.classList.toggle("hot",on); island[k].top.classList.toggle("pulse",on); island[k].nm.classList.toggle("hot",on); }
+}
+function popZone(zk){ if(!island||!island[zk]) return; const g=island[zk].g; g.classList.remove("pop"); void g.getBoundingClientRect(); g.classList.add("pop"); }
+function setBubble(t,ms){ if(!heroBub) return; heroBub.textContent=t; clearTimeout(heroBub._t); if(ms) heroBub._t=setTimeout(()=>{heroBub.textContent=""},ms); }
+function floatText(str,color,dy){
+  if(!fxLayer||!hero) return;
+  const t=el("text",{x:hero._x.toFixed(1),y:(hero._y-30-(dy||0)).toFixed(1),"text-anchor":"middle",class:"floaty"},fxLayer);
+  t.style.fill=color; t.textContent=str; setTimeout(()=>t.remove(),1900);
+}
+function celebrate(str){
+  if(!fxLayer||!hero) return;
+  floatText(str,"#00558C",14); setBubble("🎉",2600);
+  const cols=["#E5352C","#0089CE","#7DB956","#F19156","#E74587","#00558C"];
+  for(let i=0;i<16;i++){
+    const r=el("rect",{x:(hero._x+mr(-6,6)).toFixed(1),y:(hero._y-30).toFixed(1),width:3,height:5,fill:cols[i%6],class:"confetti"},fxLayer);
+    r.style.setProperty("--dx",mr(-46,46).toFixed(0)+"px"); r.style.setProperty("--dy",mr(8,40).toFixed(0)+"px"); r.style.animationDelay=mr(0,.2).toFixed(2)+"s";
+    setTimeout(()=>r.remove(),1700);
+  }
+}
+function reactFx(b){
+  if(!hero) return;
+  const d=[["績效",S.p-b.p,"#F19156"],["電量",S.e-b.e,"#7DB956"],["幸福",S.h-b.h,"#E74587"]];
+  let k=0;
+  d.forEach(([n,v,c])=>{v=Math.round(v); if(v){floatText(n+(v>0?"+":"")+v,c,k*12);k++}});
+  AKK.forEach(a=>{ if(b[a]==null) return; const v=S[a]-b[a]; if(Math.abs(v)>=.5){ floatText(ATTR[a][1]+(v>0?"+":"")+v.toFixed(1),"#0089CE",k*12); k++; } });
+  const dt=Math.round(total()-b.t); if(Math.abs(dt)>=1) floatText((dt>0?"+":"")+fmt(dt),"#00558C",k*12);
+  setBubble(S.ot>=2?"💦":S.h>b.h?"😺":S.h<b.h?"😿":"👌",2600);
+}
+setInterval(()=>{
+  const onGame=$("game").classList.contains("on"), onTitle=$("title").classList.contains("on");
+  let zs,list;
+  if(onGame&&island&&!isPaused()){zs=island;list=cats} else if(onTitle&&titleZones){zs=titleZones;list=titleCats} else return;
+  if(!list.length) return;
+  const ks=Object.keys(zs);
+  placeCat(list[Math.floor(Math.random()*list.length)],zs[ks[Math.floor(Math.random()*ks.length)]],false);
+},1300);
+
+/* ================= rendering: ui ================= */
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===id));window.scrollTo(0,0)}
+function log(t){ if(!S) return; S.logs=S.logs||[]; S.logs.unshift({age:S.age,t}); const ul=$("log"); if(!ul) return; const li=document.createElement("li"); li.innerHTML=`<b>${S.age}歲</b>`; li.appendChild(document.createTextNode(t)); ul.prepend(li); while(ul.children.length>90) ul.lastChild.remove(); }
+function showEvent(ev){
+  S.cur=ev; S.chosen=false;
+  highlight(ev.z); popZone(ev.z); if(hero) placeCat(hero,island[ev.z],true); setBubble("❗",0);
+  const z=ZONES[ev.z], card=$("card");
+  card.innerHTML=`<div class="yearbar" id="ybar"></div><div class="zt">${z.e} ${z.n}</div><h3></h3><p></p><div class="opts" id="opts"></div>`;
+  card.querySelector("h3").textContent=ev.t; card.querySelector("p").textContent=ev.d;
+  const di=defaultIdx(ev);
+  ev.o.forEach((o,i)=>{
+    if(o.c && !o.c(S)) return;
+    const b=document.createElement("button"); b.className="opt"+(i===di?" def":""); b.type="button";
+    const ok=optOk(o);
+    const s1=document.createElement("span"); s1.textContent=(ok?"":"🔒 ")+o.t; b.appendChild(s1);
+    if(o.r){ const s2=document.createElement("small"); const sk=SK[o.r[0]]; s2.textContent=ok?(sk[0]+" "+sk[1]+" Lv"+o.r[1]+" ✓"):("需要 "+sk[0]+" "+sk[1]+" Lv"+o.r[1]+"（目前 Lv"+lv(o.r[0])+(S.cap[o.r[0]]<o.r[1]?"，潛力不足":"")+"）"); s2.style.whiteSpace="normal"; s2.style.textAlign="right"; b.appendChild(s2); }
+    if(!ok){ b.disabled=true; b.title="專長等級不夠，可用 🎲 特訓或考證照提升"; }
+    b.addEventListener("click",()=>choose(i,false));
+    $("opts").appendChild(b);
+  });
+  const hint=document.createElement("div"); hint.className="muted"; hint.style.cssText="font-size:12px;margin-top:6px"; hint.textContent="🔒 的選項需要專長達到等級才能選，可以用 🎲 特訓提升。時間到還沒選，就會自動選虛線那一項。"; card.appendChild(hint);
+}
+function renderResult(ev,o,msg,auto){
+  const card=$("card"); const opts=card.querySelector(".opts"); if(opts) opts.remove();
+  const hint=card.querySelector(".muted"); if(hint) hint.remove();
+  const d=document.createElement("div"); d.className="result";
+  d.textContent=(auto?"⏰ 時間到，自動選了「"+o.t+"」。":"你選了「"+o.t+"」。")+" "+msg;
+  card.appendChild(d);
+}
+function renderIdle(){ $("card").innerHTML=`<div class="yearbar" id="ybar"></div><div class="zt">平凡的一年</div><h3>今年沒什麼大事</h3><p>可以用「💡 我要…」主動做點什麼。</p>`; highlight(null); }
+function renderAll(){
+  if(!S) return;
+  $("hWho").innerHTML=""; $("hWho").appendChild(document.createTextNode(S.name+" · "+S.age+" 歲"));
+  const sm=document.createElement("small"); sm.textContent=title(); $("hWho").appendChild(sm);
+  $("sMoney").textContent=fmt(total());
+  $("sSal").textContent=S.track==="startup"?"創業中，月薪很少":"年薪 "+S.salary+" 萬";
+  [["E","e"],["H","h"],["P","p"]].forEach(([a,k])=>{$("s"+a).textContent=Math.round(S[k]);$("b"+a).style.width=S[k]+"%"});
+  $("bE").style.background=S.e<25?"var(--med)":S.e<50?"var(--orange)":"var(--green)";
+  $("asp").textContent=S.asp?ASP[S.asp][0]+" "+ASP[S.asp][1]+" "+Math.round(aspPct()*100)+"%":"";
+  if(heroTag) heroTag.textContent=S.name;
+  $("bAct").disabled=S.acted; $("bAct").textContent=S.acted?"💡 今年已行動":"💡 我要…";
+  $("bDice").disabled=S.dice<=0; $("bDice").textContent="🎲 特訓"+(S.dice>0?" ×"+S.dice:"");
+  $("bPause").textContent=S.paused?"▶ 繼續":"⏸ 暫停";
+  $("bNext").disabled=!S.chosen;
+  renderSkills();
+  renderAttrs($("attrPanel"));
+  $("attrs").innerHTML=""; AKK.forEach(a=>{const sp=document.createElement("span");sp.textContent=ATTR[a][0]+" "+ATTR[a][1]+" "+Math.round(S[a]);sp.title="天花板 "+Math.round(S.acap[a]);$("attrs").appendChild(sp)});
+}
+function renderAttrs(box){
+  if(!box) return; box.innerHTML="";
+  AKK.forEach(a=>{ const [em,nm,mn,mx]=ATTR[a]; const r=document.createElement("div"); r.className="arow";
+    const l=document.createElement("span"); l.textContent=em+" "+nm;
+    const t=document.createElement("div"); t.className="atrack"; const f=document.createElement("i"); f.style.width=((S[a]-mn)/(mx-mn)*100).toFixed(1)+"%"; const c=document.createElement("b"); c.style.left=((S.acap[a]-mn)/(mx-mn)*100).toFixed(1)+"%"; c.title="天花板 "+Math.round(S.acap[a]); t.append(f,c);
+    const v=document.createElement("span"); v.className="aval"; v.textContent=Math.round(S[a])+" / "+Math.round(S.acap[a]);
+    r.append(l,t,v); box.appendChild(r); });
+}
+function showFate(t,msg,why){
+  const f=$("fate"); if(!f) return; f.innerHTML="";
+  const h=document.createElement("b"); h.textContent="🎲 命運事件："+t;
+  const p=document.createElement("div"); p.textContent=msg;
+  const w=document.createElement("small"); w.textContent=why;
+  f.append(h,p,w); f.hidden=false; f.classList.remove("in"); void f.offsetWidth; f.classList.add("in");
+  clearTimeout(f._t); f._t=setTimeout(()=>{f.hidden=true},4500);
+}
+let pickDie=null;
+function renderSkills(){
+  const box=$("skills"); box.innerHTML="";
+  SKK.forEach(k=>{
+    const row=document.createElement("div"); row.className="skill";
+    const nm=document.createElement("span"); nm.textContent=SK[k][0]+" "+SK[k][1]; row.appendChild(nm);
+    const pips=document.createElement("span"); pips.className="pips";
+    const L=lv(k);
+    for(let i=1;i<=5;i++){ const p=document.createElement("i"); p.className="pip"+(i<=L?" on":i>S.cap[k]?" off":""); pips.appendChild(p); }
+    row.appendChild(pips);
+    box.appendChild(row);
+  });
+}
+function clockUpdate(){
+  if(!S) return;
+  const prog=S.yt/YEAR_MS;
+  const leave=Math.min(23.5,18+S.ot);
+  const now=8+(leave-8)*Math.min(1,prog);
+  const pct=(now-8)/16*100;
+  $("dayPin").style.left=pct+"%";
+  const hh=Math.floor(now), mm=Math.floor((now-hh)*60/10)*10;
+  $("dayTxt").textContent=String(hh).padStart(2,"0")+":"+String(mm).padStart(2,"0")+(S.ot>0?"（加班中）":"");
+  const yb=$("ybar"); if(yb) yb.style.width=(prog*100)+"%";
+  if(nightRect){ const nt=clamp((now-17.5)/3.5,0,1); nightRect.setAttribute("opacity",(nt*.5).toFixed(3)); lights.setAttribute("opacity",nt.toFixed(3)); const tt=(now-8)/16; sunEl.setAttribute("x",(28+tt*344).toFixed(1)); sunEl.setAttribute("y",(38-Math.sin(Math.PI*tt)*24).toFixed(1)); sunEl.textContent=now<18.3?"☀️":"🌙"; }
+  const rem=Math.max(0,((RETIRE-S.age)*YEAR_MS+(YEAR_MS-S.yt))/1000);
+  $("hClock").textContent=Math.floor(rem/60)+":"+String(Math.floor(rem%60)).padStart(2,"0");
+}
+
+/* ================= modal ================= */
+function openModal(build){ $("modal").classList.add("on"); $("msheet").innerHTML=""; build($("msheet")); }
+function closeModal(){ $("modal").classList.remove("on"); pickDie=null; if(S&&!S.ended) renderAll(); }
+$("modal").addEventListener("click",e=>{ if(e.target.id==="modal") closeModal(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&$("modal").classList.contains("on")) closeModal(); });
+const isPaused=()=>!S||S.paused||S.ended||$("modal").classList.contains("on");
+
+$("bAct").addEventListener("click",()=>{
+  if(!S||S.acted) return;
+  openModal(m=>{
+    m.innerHTML="<h3>💡 今年我要…</h3><p class='muted' style='margin:0 0 10px;font-size:13px'>每年只能主動做一件事。打開這個選單時，時間會暫停。</p><div class='acts' id='acts'></div><div class='controls'><button class='btn ghost' type='button' id='mClose'>先不要</button></div>";
+    ACTS.forEach(a=>{
+      if(a.c && !a.c()) return;
+      const b=document.createElement("button"); b.className="opt"; b.type="button";
+      const s=document.createElement("span"); s.textContent=a.t; b.appendChild(s);
+      const d=document.createElement("small"); d.textContent=a.d; d.style.fontWeight="400"; b.appendChild(d);
+      b.addEventListener("click",()=>{ S.acted=true; const r=a.run(); if(r) log("💡 "+a.t+"："+r); closeModal(); });
+      m.querySelector("#acts").appendChild(b);
+    });
+    m.querySelector("#mClose").addEventListener("click",closeModal);
+  });
+});
+$("bDice").addEventListener("click",()=>{
+  if(!S||S.dice<=0) return;
+  const n=Math.min(S.dice,2); const vals=[]; for(let i=0;i<n;i++) vals.push(1+Math.floor(R()*6));
+  const used=vals.map(()=>false);
+  const faces=["","⚀","⚁","⚂","⚃","⚄","⚅"];
+  openModal(m=>{
+    m.innerHTML="<h3>🎲 特訓時間</h3><p class='muted' style='margin:0;font-size:13px'>點一顆骰子，再點下面的專長。點數就是經驗值，超過潛力上限的部分會浪費。</p><div class='dice' id='dice'></div><div id='mskills'></div><div class='controls'><button class='btn ghost' type='button' id='mClose'>先留著</button></div>";
+    const dz=m.querySelector("#dice");
+    const drawSk=()=>{
+      const box=m.querySelector("#mskills"); box.innerHTML="";
+      SKK.forEach(k=>{
+        const row=document.createElement("button"); row.type="button"; row.className="opt"; row.disabled=pickDie==null||lv(k)>=S.cap[k];
+        const s=document.createElement("span"); s.textContent=SK[k][0]+" "+SK[k][1]+"  Lv"+lv(k)+" / 上限 "+S.cap[k]; row.appendChild(s);
+        const x=document.createElement("small"); x.textContent=S.xp[k]+" / "+XP_LV[Math.min(5,lv(k)+1)]+" XP"; row.appendChild(x);
+        row.addEventListener("click",()=>{ if(pickDie==null) return; used[pickDie]=true; addXp(k,vals[pickDie]); S.dice--; log("🎲 特訓 "+SK[k][1]+" +"+vals[pickDie]); pickDie=null; drawDice(); drawSk(); renderAll(); if(used.every(u=>u)) setTimeout(closeModal,350); });
+        box.appendChild(row);
+      });
+    };
+    const drawDice=()=>{ dz.innerHTML=""; vals.forEach((v,i)=>{ const b=document.createElement("button"); b.type="button"; b.className="die"+(pickDie===i?" sel":"")+(used[i]?" used":""); b.disabled=used[i]; b.textContent=faces[v]; b.setAttribute("aria-label","骰子 "+v+" 點"); b.addEventListener("click",()=>{pickDie=i;drawDice();drawSk()}); dz.appendChild(b); }); };
+    pickDie=null; drawDice(); drawSk();
+    m.querySelector("#mClose").addEventListener("click",closeModal);
+  });
+});
+$("bPause").addEventListener("click",()=>{ if(!S) return; S.paused=!S.paused; renderAll(); });
+$("bNext").addEventListener("click",()=>{ if(S&&S.chosen&&!isPaused()) S.yt=YEAR_MS; });
+
+/* ================= main loop ================= */
+let lastT=0;
+function loop(t){
+  const dt=lastT?Math.min(100,t-lastT):0; lastT=t;
+  if(S && !isPaused() && $("game").classList.contains("on")){
+    S.yt+=dt;
+    if(S.fate && S.yt>YEAR_MS*.55){ fireFate(); if(!S||S.ended){requestAnimationFrame(loop);return;} }
+    if(S.yt>=YEAR_MS){ endYear(); }
+    if(S && !S.ended) clockUpdate();
+  }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* ================= scoring & end ================= */
+function avgLeave(){ return S.leaveN?S.leaveSum/S.leaveN:18; }
+function happyAvg(){ return S.hist.length?S.hist.reduce((a,b)=>a+b.h,0)/S.hist.length:S.h; }
+function aspPct(){
+  const t=total();
+  switch(S.asp){
+    case "rich": return clamp(Math.log10(Math.max(t,100)/100)/Math.log10(50),0,1);
+    case "cdo": return S.track==="founder"?.8:S.lvl/5;
+    case "tech": return clamp((lv("sql")+lv("bi")+lv("ai"))/13,0,1);
+    case "chill": return clamp((20.5-avgLeave())/2,0,1)*.5+happyAvg()/200;
+    case "found": return S.track==="founder"?1:S.flags.acq?.6:S.flags.tried?.25:0;
+    case "world": return (S.flags.expat?.5:0)+(S.flags.returned?.3:0)+S.lvl/5*.2;
+  }
+  return 0;
+}
+function endGame(kind){
+  if(S.ended) return;
+  S.ended=true; S.ending=kind;
+  if(!S.hist.length||S.hist[S.hist.length-1].age!==S.age) S.hist.push({age:S.age,h:S.h,t:total()});
+  if(kind==="burn") ach("burn");
+  if(kind==="fire") ach("fire");
+  if(avgLeave()<=18.6 && S.hist.length>=20) ach("chill");
+  const ap=aspPct();
+  const wealth=clamp(Math.log10(Math.max(total(),50)/50)/Math.log10(200),0,1)*100;
+  const career=(S.track==="founder"?4.5:S.lvl)/5*100;
+  let score=.32*ap*100+.26*happyAvg()+.2*career+.22*wealth;
+  if(kind==="burn") score-=15;
+  const G=[["SSS",88],["SS",78],["S",68],["A",57],["B",46],["C",34],["D",-999]];
+  let g=G.find(x=>score>=x[1])[0];
+  const cap = ap<.2?"B":ap<.55?"S":ap<.8?"SS":"SSS";
+  const order=G.map(x=>x[0]); if(order.indexOf(g)<order.indexOf(cap)) g=cap;
+  if(g==="SSS") ach("sss");
+  // persist achievements
+  let saved={}; try{ saved=JSON.parse(localStorage.getItem("meow-ach")||"{}"); }catch(e){}
+  Object.assign(saved,S.ach); try{ localStorage.setItem("meow-ach",JSON.stringify(saved)); }catch(e){}
+  renderEnd(g,ap,saved);
+}
+function renderEnd(g,ap,saved){
+  show("end");
+  $("eGrade").textContent=g;
+  const titles={retire:"65 歲，光榮退休",fire:S.age+" 歲，提早退休",burn:S.age+" 歲，燃燒殆盡，離開喵島"};
+  $("eTitle").textContent=S.name+"："+titles[S.ending];
+  $("eSub").textContent="最後的職稱是「"+title()+"」。種子碼 "+S.seed+"。";
+  const kv=[["志向 "+ASP[S.asp][0]+" "+ASP[S.asp][1],Math.round(ap*100)+"%"],["總資產",fmt(total())],["平均幸福感",Math.round(happyAvg())],
+    ["平均下班時間",(()=>{const a=avgLeave();return Math.floor(a)+":"+String(Math.round((a%1)*60)).padStart(2,"0")})()],["跳槽次數",S.jobHops+" 次"],["人脈",Math.round(S.n)]].concat(AKK.map(a=>[ATTR[a][0]+" "+ATTR[a][1]+"（天花板 "+Math.round(S.acap[a])+"）",Math.round(S.start[a])+" → "+Math.round(S[a])]));
+  $("eKv").innerHTML=""; kv.forEach(([a,b])=>{const d=document.createElement("div");d.textContent=a;const bb=document.createElement("b");bb.textContent=b;d.appendChild(bb);$("eKv").appendChild(d)});
+  drawChart();
+  const tl=$("eTl"); tl.innerHTML="";
+  const ms=[{age:22,t:"進入喵喵金控，成為數據分析師"}].concat(S.ms);
+  ms.forEach(m=>{const li=document.createElement("li");li.textContent=m.age+" 歲　"+m.t;tl.appendChild(li)});
+  const ab=$("eAch"); ab.innerHTML="";
+  const got=Object.keys(saved).length;
+  $("eAchN").textContent="（累計 "+got+" / "+Object.keys(ACH).length+"，這局解鎖 "+Object.keys(S.ach).length+" 項）";
+  for(const k in ACH){ const s=document.createElement("span"); s.className="badge"+(saved[k]?"":" lock"); s.textContent=(saved[k]?ACH[k][0]+" "+ACH[k][1]:"❔ ？？？")+(S.ach[k]?" ✨":""); ab.appendChild(s); }
+}
+function drawChart(){
+  const svg=$("chart"); svg.innerHTML="";
+  const H=S.hist, W=600, Ht=200, pl=34, pr=10, pt=12, pb=24;
+  const xs=a=>pl+(a-22)/(Math.max(23,H[H.length-1].age)-22)*(W-pl-pr);
+  const maxT=Math.max(100,...H.map(h=>h.t)), minT=Math.min(0,...H.map(h=>h.t));
+  const yh=v=>pt+(1-v/100)*(Ht-pt-pb);
+  const yt=v=>pt+(1-(v-minT)/(maxT-minT))*(Ht-pt-pb);
+  for(let i=0;i<=4;i++){ el("line",{x1:pl,x2:W-pr,y1:pt+i*(Ht-pt-pb)/4,y2:pt+i*(Ht-pt-pb)/4,stroke:"var(--line)"},svg); }
+  [22,30,40,50,60].forEach(a=>{ if(a<=H[H.length-1].age){ const t=el("text",{x:xs(a),y:Ht-6,"text-anchor":"middle","font-size":11,fill:"var(--ink2)"},svg); t.textContent=a+"歲"; } });
+  const t2=el("text",{x:4,y:pt+8,"font-size":10,fill:"var(--ink2)"},svg); t2.textContent=fmt(maxT);
+  el("polyline",{points:H.map(h=>xs(h.age)+","+yt(h.t)).join(" "),fill:"none",stroke:"#00558C","stroke-width":2.5},svg);
+  el("polyline",{points:H.map(h=>xs(h.age)+","+yh(h.h)).join(" "),fill:"none",stroke:"#E74587","stroke-width":2},svg);
+}
+
+/* ================= flow ================= */
+function seedFromHash(){ const h=(location.hash||"").replace("#",""); return /^[A-Z0-9]{6}$/.test(h)?h:null; }
+$("sd").value=seedFromHash()||newSeed();
+$("reroll").addEventListener("click",()=>{$("sd").value=newSeed()});
+let chosenBreed=BKEYS[Math.floor(Math.random()*BKEYS.length)];
+function buildBreeds(){
+  const box=$("breeds"); box.innerHTML="";
+  BKEYS.forEach(k=>{
+    const b=document.createElement("button"); b.type="button"; b.className="breed"; b.setAttribute("role","radio"); b.setAttribute("aria-checked",k===chosenBreed?"true":"false");
+    const sv=document.createElementNS(SVGNS,"svg"); sv.setAttribute("viewBox","-14 -16 30 25"); sv.setAttribute("aria-hidden","true");
+    const bob=el("g",{class:"bob"},sv); catShape(bob,k,false);
+    const nm=document.createElement("span"); nm.textContent=BREEDS[k].n;
+    b.append(sv,nm);
+    b.addEventListener("click",()=>{ chosenBreed=k; buildBreeds(); setTitleHero(); });
+    box.appendChild(b);
+  });
+  $("breedDesc").textContent=BREEDS[chosenBreed].n+"："+BREEDS[chosenBreed].d;
+}
+buildBreeds();
+drawIsland($("titleIsland"),false);
+function storyText(){
+  const bg=S.bg,B=BREEDS[S.breed],nm=S.name;
+  const fam=bg.fam.n==="家裡有礦"?"家裡有礦的富裕家庭":bg.fam.n==="需要負擔家計"?"需要幫忙負擔家計的家庭":bg.fam.n;
+  let t=`${nm}是一隻${B.n}，在${fam}長大。`;
+  t+=S.iq>=118?"從小就是親戚口中「很聰明」的孩子，":S.iq<100?"念書不算頂尖，靠努力撐過一次次考試，":"成績一直中上，";
+  t+=`大學念${bg.major.n}，${bg.exp.n}。`;
+  t+=S.eq>=60?"人緣很好，走到哪都交得到朋友；":S.eq<42?"不太會看場合說話，常不小心得罪人；":"跟大家相處還算融洽；";
+  t+=S.l>=65?"運氣也一直不錯，尾牙抽獎常常中。":S.l<40?"只是運氣總差一點，排隊永遠排到最慢的那一排。":"運氣普普通通。";
+  t+=S.body>=72?"身體很好，熬夜也不太會累。":S.body<52?"體力偏弱，一換季就感冒。":"";
+  t+=`個性是「${bg.per.n}」，${bg.per.d}。22 歲這年，${nm}收到喵喵金控數據分析師的錄取通知，年薪 62 萬。明天，就是上班的第一天。`;
+  return t;
+}
+function toResume(){
+  const name=($("nm").value||"").trim()||pick.call(null,["小橘","麻糬","黑糖","奶茶","阿虎","豆花"]);
+  let seed=($("sd").value||"").toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6); if(seed.length<6) seed=(seed+newSeed()).slice(0,6);
+  $("sd").value=seed;
+  try{ history.replaceState(null,"","#"+seed); }catch(e){}
+  initState(name,seed,chosenBreed);
+  const bg=S.bg;
+  $("rName").textContent=name+"，22 歲";
+  $("rStory").textContent=storyText();
+  renderAttrs($("rAttr"));
+  const facts=[["品種",BREEDS[S.breed].n+"："+BREEDS[S.breed].d],["家庭",bg.fam.n+"。"+bg.fam.d],["學歷",bg.major.n],["大學經歷",bg.exp.n],["個性",bg.per.n+"："+(bg.per.d||"")]];
+  $("rFacts").innerHTML=""; facts.forEach(([a,b])=>{const dt=document.createElement("dt");dt.textContent=a;const dd=document.createElement("dd");dd.textContent=b;$("rFacts").append(dt,dd)});
+  $("rPot").innerHTML="";
+  SKK.forEach(k=>{ const d=document.createElement("div"); d.className="skill"; const s=document.createElement("span"); s.textContent=SK[k][0]+" "+SK[k][1]; const p=document.createElement("span"); p.className="pips"; for(let i=1;i<=5;i++){const q=document.createElement("i");q.className="pip"+(i<=lv(k)?" on":i>S.cap[k]?" off":"");p.appendChild(q)} d.append(s,p); $("rPot").appendChild(d); });
+  $("rAsp").innerHTML="";
+  for(const k in ASP){ const b=document.createElement("button"); b.type="button"; b.className="asp"; const bb=document.createElement("b"); bb.textContent=ASP[k][0]+" "+ASP[k][1]; const sm=document.createElement("small"); sm.textContent=ASP[k][2]; b.append(bb,sm); b.addEventListener("click",()=>startGame(k)); $("rAsp").appendChild(b); }
+  show("resume");
+}
+function startGame(asp){
+  S.asp=asp;
+  $("log").innerHTML="";
+  island=drawIsland($("island"),true);
+  show("game");
+  log("👋 "+BREEDS[S.breed].n+" "+S.name+" 加入喵喵金控。志向："+ASP[asp][1]+"。");
+  startYear();
+}
+$("go").addEventListener("click",toResume);
+$("nm").addEventListener("keydown",e=>{if(e.key==="Enter")toResume()});
+$("again").addEventListener("click",()=>{ $("sd").value=newSeed(); $("nm").value=S.name; S=null; show("title"); });
+$("same").addEventListener("click",()=>{ $("nm").value=S.name; const sd=S.seed; S=null; $("sd").value=sd; toResume(); });
+$("copy").addEventListener("click",async()=>{ const url=location.href.split("#")[0]+"#"+S.seed; try{ await navigator.clipboard.writeText(url); $("copy").textContent="已複製連結"; }catch(e){ $("copy").textContent="種子碼："+S.seed; } });
+window.MEOW={get S(){return S},endYear,startYear,choose,toResume,startGame};
+</script>
+</body>
+</html>
