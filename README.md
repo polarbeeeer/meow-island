@@ -5,7 +5,7 @@
 
 ## 🎮 立即遊玩
 
-👉 https://polarbeeeer.github.io/meow-island/
+👉 https://polarbeeeer.github.io/meow-island
 
 手機直式優化，打開網址就能玩，不需安裝。網址後面加上 `#種子碼`（例如 `#AB12CD`）可以和朋友挑戰同一個出身。
 
